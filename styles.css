@@ -486,3 +486,17 @@ body.scene-rsvp .f3{ transform: translate(80px, 55px) scale(1.10); opacity: 0.38
   .f2{ width: min(420px, 65vw); }
   .f3{ width: min(340px, 58vw); }
 }
+
+@media (max-width: 760px){
+  .top{
+    inset: 92px 14px auto 14px; /* pushes the top buttons down */
+  }
+}
+
+@media (max-width: 760px){
+  .top{
+    top: 64px;      /* below the announce bar */
+    left: 14px;
+    right: 14px;
+  }
+}

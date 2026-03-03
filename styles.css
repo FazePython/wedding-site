@@ -20,7 +20,7 @@ body{
   background: var(--bg);
   color: var(--rose);
   font-family: var(--font);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 /* =========================
@@ -105,7 +105,7 @@ body{
 
   font-family: var(--font);
   letter-spacing: 2px;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 13px;
 
   color: var(--rose);
@@ -151,7 +151,7 @@ body{
 .kicker{
   font-family: var(--font);
   color: var(--rose2);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 2px;
   font-size: 14px;
   margin: 0 0 12px;
@@ -159,7 +159,7 @@ body{
 
 .names{
   font-family: var(--font);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 3px;
   line-height: 1.05;
   margin: 0 0 12px;
@@ -169,7 +169,7 @@ body{
 }
 
 .amp{
-  font-weight: 500;
+  font-weight: 400;
   color: var(--rose);
   margin: 0 12px;
 }
@@ -177,7 +177,7 @@ body{
 .date{
   margin: 0 0 22px;
   font-family: var(--font);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 2px;
   font-size: 16px;
   color: var(--rose2);
@@ -186,7 +186,7 @@ body{
 
 h2{
   font-family: var(--font);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 3px;
   font-size: clamp(34px, 4.4vw, 54px);
   margin: 0 0 18px;
@@ -198,7 +198,7 @@ h2{
   margin: 0 auto 12px;
   max-width: 78ch;
   font-family: var(--font);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--rose2);
   line-height: 1.85;
   font-size: 17px;
@@ -211,7 +211,7 @@ h2{
 .miniTitle{
   margin: 22px 0 6px;
   font-family: var(--font);
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 2px;
   font-size: 18px;
   text-transform: uppercase;
@@ -242,7 +242,7 @@ h2{
 .label{
   min-width: 180px;
   font-family: var(--font);
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--rose);
@@ -252,7 +252,7 @@ h2{
   flex: 1;
   text-align: right;
   font-family: var(--font);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 1px;
   color: var(--rose2);
 }
@@ -270,7 +270,7 @@ h2{
 
   font-family: var(--font);
   letter-spacing: 2px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--rose2);
   text-transform: uppercase;
 }
@@ -299,7 +299,7 @@ h2{
   text-decoration: none;
 
   font-family: var(--font);
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-size: 12px;
@@ -391,7 +391,7 @@ h2{
 
   font-family: var(--font);
   letter-spacing: 1px;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 14px;
   line-height: 1.55;
 

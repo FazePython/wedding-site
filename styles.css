@@ -489,7 +489,7 @@ body.scene-rsvp .f3{ transform: translate(80px, 55px) scale(1.10); opacity: 0.38
 
 @media (max-width: 760px){
   .top{
-    inset: 92px 14px auto 14px; /* pushes the top buttons down */
+    inset: 110px 14px auto 14px; /* pushes the top buttons down */
   }
 }
 
@@ -500,3 +500,4 @@ body.scene-rsvp .f3{ transform: translate(80px, 55px) scale(1.10); opacity: 0.38
     right: 14px;
   }
 }
+

@@ -8,27 +8,32 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
-<body>
-  <!-- Tiny corner mark + RSVP -->
-  <header class="top">
-  
-  </header>
-<div id="bg" aria-hidden="true"></div>
-<div id="grain" aria-hidden="true"></div>
 
-<div class="bgStack" aria-hidden="true">
-  <img src="./frames/bg-0.jpeg" class="bgImg isOn" alt="">
-  <img src="./frames/bg-1.jpeg" class="bgImg" alt="">
-  <img src="./frames/bg-2.jpeg" class="bgImg frame2" alt="">
-  <img src="./frames/bg-3.png" class="bgImg" alt="">
-  <img src="./frames/bg-4.jpg" class="bgImg" alt="">
+<body>
+  <!-- Background frames -->
+  <div class="bgStack" aria-hidden="true">
+  <img class="floral f1" src="./florals/corner.jpg" alt="">
+  <img class="floral f2" src="./florals/sprig1.png" alt="">
+  <img class="floral f3" src="./florals/sprig2.png" alt="">
+  </div>
+
+  <div class="announce" role="note">
+  We invite you to celebrate the wedding of Zahin Zaima & Faizan Qureshi, hosted by her parents,
+  Nazmun Nahar & Humayun Kabir. Please RSVP by August 4th.
 </div>
-  <!-- Dot nav -->
+
+  <!-- Minimal corner header -->
+  <header class="top">
+    <a class="mark" href="#home" aria-label="Top">Z&F</a>
+    <a class="rsvpTop" href="#rsvp">RSVP</a>
+  </header>
+
+  <!-- Dots -->
   <aside class="dots" aria-label="Sections">
     <a class="dot active" href="#home" aria-label="Home"></a>
     <a class="dot" href="#events" aria-label="Events"></a>
@@ -42,9 +47,11 @@
     <section class="panel" id="home">
       <div class="inner">
         <p class="kicker">Dallas, Texas</p>
+
         <h1 class="names">
           Zahin Zaima <span class="amp">&</span> Faizan Qureshi
         </h1>
+
         <p class="date">October 4<sup>th</sup>, 2026</p>
 
         <div class="count" aria-label="Countdown">
@@ -58,7 +65,7 @@
         </div>
 
         <div class="links">
-          <a class="btn" href="#events">Details</a>
+          <a class="btn" href="#events">DETAILS</a>
           <a class="btn ghost" href="#rsvp">RSVP</a>
         </div>
 
@@ -70,6 +77,7 @@
     <section class="panel" id="events">
       <div class="inner">
         <h2>Events</h2>
+
         <p class="line">
           <span class="label">Gaye Holud</span>
           <span class="value">Sat, Oct 3, 2026 · 6:00–11:00 PM</span>
@@ -82,16 +90,12 @@
 
         <p class="line">
           <span class="label">Venue</span>
-          <span class="value">
-            The Crown Venue · 10841 Composite Drive, Dallas, TX 75220
-          </span>
+          <span class="value">The Crown Venue · 10841 Composite Drive, Dallas, TX 75220</span>
         </p>
 
         <p class="note">
           Gates close at <b>7:20 PM</b>. Please arrive on time.
         </p>
-
-        
       </div>
     </section>
 
@@ -142,10 +146,12 @@
           <span class="label">Quality Inn & Suites</span>
           <span class="value">10835 Composite Dr · Walkable</span>
         </p>
+
         <p class="line">
           <span class="label">Hyatt Place Dallas/Garland/Richardson</span>
           <span class="value">5101 N President George Bush Hwy, Garland</span>
         </p>
+
         <p class="line">
           <span class="label">Tru by Hilton Garland Richardson</span>
           <span class="value">5055 N President George Bush Hwy, Garland</span>
@@ -154,7 +160,7 @@
         <div class="links">
           <a class="btn ghost" target="_blank" rel="noreferrer"
              href="https://www.google.com/maps?q=10841+Composite+Drive,+Dallas,+TX+75220">
-            Open venue in Maps
+            OPEN MAP
           </a>
         </div>
       </div>
@@ -175,7 +181,7 @@
           </a>
 
           <button class="btn ghost" id="icsBtn" type="button">
-            Add Oct 4 to Calendar
+            ADD TO CALENDAR
           </button>
         </div>
 

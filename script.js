@@ -45,11 +45,11 @@ const bgImgs = Array.from(document.querySelectorAll(".bgImg"));
 const bgPanels = Array.from(document.querySelectorAll(".panel"));
 
 const frameForPanel = {
-  home:   0, // calm night
-  events: 1, // stars appear
-  dress:  2, // bokeh/lights
-  travel: 3, // confetti
-  rsvp:   4, // fireworks finale
+  home:   0,
+  events: 1,
+  dress:  2,
+  travel: 3,
+  rsvp:   4,
 };
 
 function setFrame(idx){
@@ -57,7 +57,7 @@ function setFrame(idx){
   bgImgs.forEach((img, i) => img.classList.toggle("isOn", i === idx));
 }
 
-// Set initial frame immediately
+// initial
 setFrame(frameForPanel[location.hash.replace("#","")] ?? 0);
 
 const bgObserver = new IntersectionObserver((entries) => {
@@ -73,6 +73,23 @@ const bgObserver = new IntersectionObserver((entries) => {
 bgPanels.forEach(p => bgObserver.observe(p));
 
 // =====================
+// Dot active highlight
+// =====================
+const dots = Array.from(document.querySelectorAll(".dot"));
+
+const dotObserver = new IntersectionObserver((entries) => {
+  const best = entries
+    .filter(e => e.isIntersecting)
+    .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+  if (!best) return;
+
+  const id = best.target.id;
+  dots.forEach(dot => dot.classList.toggle("active", dot.getAttribute("href") === `#${id}`));
+}, { threshold: [0.55, 0.7, 0.85] });
+
+bgPanels.forEach(p => dotObserver.observe(p));
+
+// =====================
 // Add to Calendar (.ics)
 // =====================
 const icsBtn = document.getElementById("icsBtn");
@@ -86,8 +103,8 @@ if (icsBtn) {
       "BEGIN:VEVENT",
       "UID:" + (Date.now() + "@zf-wedding"),
       "DTSTAMP:" + toICSDate(new Date()),
-      "DTSTART:20261005T000000Z", // 7:00 PM CDT = 00:00Z
-      "DTEND:20261005T040000Z",   // 11:00 PM CDT = 04:00Z
+      "DTSTART:20261005T000000Z",
+      "DTEND:20261005T040000Z",
       "SUMMARY:Zahin & Faizan — Nikkah + Wedding",
       "LOCATION:The Crown Venue, 10841 Composite Drive, Dallas, TX 75220",
       "DESCRIPTION:Gates close at 7:20 PM. Please arrive on time.",
@@ -118,3 +135,36 @@ function toICSDate(date){
   const se = String(date.getUTCSeconds()).padStart(2,"0");
   return `${y}${mo}${da}T${ho}${mi}${se}Z`;
 }
+
+
+const sceneForPanel = {
+  home: "scene-home",
+  events: "scene-events",
+  dress: "scene-dress",
+  travel: "scene-travel",
+  rsvp: "scene-rsvp",
+};
+
+function setScene(id){
+  const scene = sceneForPanel[id];
+  if (!scene) return;
+
+  document.body.classList.remove(
+    "scene-home","scene-events","scene-dress","scene-travel","scene-rsvp"
+  );
+  document.body.classList.add(scene);
+}
+
+// set initial scene
+setScene(location.hash.replace("#","") || "home");
+
+const sceneObserver = new IntersectionObserver((entries) => {
+  const best = entries
+    .filter(e => e.isIntersecting)
+    .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+  if (!best) return;
+
+  setScene(best.target.id);
+}, { threshold: [0.55, 0.7, 0.85] });
+
+document.querySelectorAll(".panel").forEach(p => sceneObserver.observe(p));

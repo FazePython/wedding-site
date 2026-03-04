@@ -301,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       ctx.globalCompositeOperation = "destination-out";
       ctx.beginPath();
-      ctx.arc(x, y, 18, 0, Math.PI*2);
+      ctx.arc(x, y, 12, 0, Math.PI*2);
       ctx.fill();
       ctx.globalCompositeOperation = "source-over";
     }

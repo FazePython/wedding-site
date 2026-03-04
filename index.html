@@ -13,7 +13,15 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 
-
+    <!-- Curtain overlay (ADD THIS RIGHT HERE) -->
+  <div id="curtain" class="curtain" aria-hidden="true">
+    <div class="curtain__panel curtain__panel--left"></div>
+    <div class="curtain__panel curtain__panel--right"></div>
+    <div class="curtain__valance"></div>
+    <div class="curtain__prompt" role="button" tabindex="0" aria-label="Click to open">
+  Click to open
+</div>
+  </div>
 
   <div class="announce" role="note">
   We invite you to celebrate the wedding of Zahin Zaima & Faizan Qureshi, hosted by her parents,
@@ -37,34 +45,58 @@
 
   <main class="snap">
     <!-- HOME -->
-    <section class="panel" id="home">
-      <div class="inner">
-        <p class="kicker">Dallas, Texas</p>
+    <section class="panel hero" id="home">
+  <div class="hero__inner">
+    <p class="hero__topline">YOU ARE CORDIALLY INVITED TO CELEBRATE THE WEDDING OF</p>
 
-        <h1 class="names">
-          Zahin <span class="amp">&</span> Faizan
-        </h1>
+    <h1 class="hero__names">
+      Zahin <span class="hero__amp">&</span><br>
+      Faizan
+    </h1>
 
-        <p class="date">October 4<sup>th</sup>, 2026</p>
+    <p class="hero__bottomline">
+      We invite you to celebrate the wedding of Zahin Zaima &amp; Faizan Qureshi, hosted by her parents,
+      Nazmun Nahar &amp; Humayun Kabir. Please RSVP by August 4th.
+    </p>
 
-        <div class="count" aria-label="Countdown">
-          <span><b id="d">—</b> days</span>
-          <span class="sep">/</span>
-          <span><b id="h">—</b> hrs</span>
-          <span class="sep">/</span>
-          <span><b id="m">—</b> min</span>
-          <span class="sep">/</span>
-          <span><b id="s">—</b> sec</span>
-        </div>
+    <div class="hero__scroll" aria-hidden="true">
+      <span>SCROLL</span>
+      <span class="hero__arrow">↓</span>
+    </div>
+  </div>
+</section>
 
-        <div class="links">
-          <a class="btn" href="#events">DETAILS</a>
-          <a class="btn ghost" href="#rsvp">RSVP</a>
-        </div>
+<section class="panel reveal" id="reveal">
+  <div class="reveal__inner">
+    <p class="reveal__hint">Scratch all three circles to continue</p>
 
-        <div class="hint" aria-hidden="true">scroll</div>
+    <h1 class="reveal__title">Reveal</h1>
+    <p class="reveal__subtitle">Scratch to discover the date</p>
+
+    <div class="reveal__circles" aria-label="Scratch to reveal date">
+      <div class="scratch" data-i="0" aria-label="Scratch circle 1">
+        <canvas class="scratch__canvas" width="220" height="220"></canvas>
+        <div class="scratch__under">OCT</div>
       </div>
-    </section>
+
+      <div class="scratch" data-i="1" aria-label="Scratch circle 2">
+        <canvas class="scratch__canvas" width="220" height="220"></canvas>
+        <div class="scratch__under">4TH</div>
+      </div>
+
+      <div class="scratch" data-i="2" aria-label="Scratch circle 3">
+        <canvas class="scratch__canvas" width="220" height="220"></canvas>
+        <div class="scratch__under">2026</div>
+      </div>
+    </div>
+
+     <p class="reveal__done" id="revealDone" hidden>
+      Date revealed: <b>October 4th, 2026</b>
+    </p>
+
+  </div>
+</section>
+
 
     <!-- EVENTS -->
     <section class="panel" id="events">

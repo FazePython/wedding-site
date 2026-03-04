@@ -880,21 +880,3 @@ body.revealed main { opacity: 1; }
   }
 }
 
-@media (max-width: 360px){
-  .reveal__circles{
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding: 0 12px;
-  }
-}
-
-  .scratch{
-    width: 110px;               /* smaller so 3 fit */
-    height: 110px;
-  }
-
-  .scratch__under{
-    font-size: 16px;
-    border-width: 6px;
-    letter-spacing: 2px;
-  }

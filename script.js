@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ===== Scratch Reveal Logic =====
+// ===== Scratch Reveal Logic (FIXED for mobile sizing + DPR) =====
 (function initScratchReveal(){
   const revealSection = document.getElementById("reveal");
   if (!revealSection) return;
@@ -226,7 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let completed = new Set();
 
   function makeGoldTexture(ctx, w, h){
-    // simple "gold" look using gradients (no image required)
     const g1 = ctx.createRadialGradient(w*0.35, h*0.35, 10, w*0.5, h*0.5, w*0.7);
     g1.addColorStop(0, "#f7e2b5");
     g1.addColorStop(0.35, "#e9c78a");
@@ -238,6 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
     g2.addColorStop(0.5, "rgba(0,0,0,.10)");
     g2.addColorStop(1, "rgba(255,255,255,.25)");
 
+    ctx.clearRect(0,0,w,h);
     ctx.fillStyle = g1;
     ctx.fillRect(0,0,w,h);
     ctx.fillStyle = g2;
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // subtle circular "brushed metal" rings
     ctx.globalAlpha = 0.18;
     ctx.strokeStyle = "rgba(255,255,255,0.6)";
-    for (let r = 12; r < w/2; r += 10){
+    for (let r = 10; r < Math.min(w,h)/2; r += 10){
       ctx.beginPath();
       ctx.arc(w/2, h/2, r, 0, Math.PI*2);
       ctx.stroke();
@@ -255,15 +255,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getScratchPercent(ctx, w, h){
-    // sample pixels to estimate cleared area (fast enough for 220x220)
     const img = ctx.getImageData(0,0,w,h).data;
     let transparent = 0;
-    const step = 8; // sample every N pixels
+    const step = 10; // bigger step = faster
     for (let y=0; y<h; y+=step){
       for (let x=0; x<w; x+=step){
         const i = (y*w + x) * 4;
-        const a = img[i+3];
-        if (a === 0) transparent++;
+        if (img[i+3] === 0) transparent++;
       }
     }
     const total = (Math.ceil(h/step) * Math.ceil(w/step));
@@ -283,31 +281,48 @@ document.addEventListener("DOMContentLoaded", () => {
   tiles.forEach((tile, idx) => {
     const canvas = tile.querySelector(".scratch__canvas");
     const ctx = canvas.getContext("2d");
-    const w = canvas.width;
-    const h = canvas.height;
 
-    // draw the gold cover
-    makeGoldTexture(ctx, w, h);
-
-    // only scratch inside the circle
-    ctx.globalCompositeOperation = "source-over";
-
+    let opened = false;
     let isDown = false;
+
+    // ✅ RESIZE CANVAS TO MATCH CSS SIZE (fixes mobile circle mismatch)
+    function resizeCanvasToCSS(){
+      const rect = canvas.getBoundingClientRect();
+      const dpr = window.devicePixelRatio || 1;
+
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+
+      // scale drawing so 1 unit = 1 CSS pixel
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      // draw cover using CSS pixel sizes
+      makeGoldTexture(ctx, rect.width, rect.height);
+
+      // reset to normal mode after drawing cover
+      ctx.globalCompositeOperation = "source-over";
+    }
+
+    // initial draw (slight delay helps if fonts/layout still loading)
+    setTimeout(resizeCanvasToCSS, 50);
+    window.addEventListener("resize", resizeCanvasToCSS, { passive: true });
 
     function scratchAt(clientX, clientY){
       const rect = canvas.getBoundingClientRect();
-      const x = (clientX - rect.left) * (w / rect.width);
-      const y = (clientY - rect.top) * (h / rect.height);
+      const x = (clientX - rect.left);
+      const y = (clientY - rect.top);
+
+      const brush = rect.width < 130 ? 10 : 12; // smaller brush on mobile
 
       ctx.globalCompositeOperation = "destination-out";
       ctx.beginPath();
-      ctx.arc(x, y, 12, 0, Math.PI*2);
+      ctx.arc(x, y, brush, 0, Math.PI*2);
       ctx.fill();
       ctx.globalCompositeOperation = "source-over";
     }
 
     function maybeComplete(){
-      const pct = getScratchPercent(ctx, w, h);
+      const pct = getScratchPercent(ctx, canvas.width, canvas.height);
       if (pct > 0.45 && !tile.classList.contains("done")){
         tile.classList.add("done");
         completed.add(idx);
@@ -316,9 +331,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Mouse
-    canvas.addEventListener("mousedown", (e) => { isDown = true; scratchAt(e.clientX, e.clientY); });
-    window.addEventListener("mouseup", () => { if (isDown){ isDown = false; maybeComplete(); } });
-    canvas.addEventListener("mousemove", (e) => { if (isDown) scratchAt(e.clientX, e.clientY); });
+    canvas.addEventListener("mousedown", (e) => {
+      isDown = true;
+      scratchAt(e.clientX, e.clientY);
+    });
+
+    window.addEventListener("mouseup", () => {
+      if (!isDown) return;
+      isDown = false;
+      maybeComplete();
+    });
+
+    canvas.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      scratchAt(e.clientX, e.clientY);
+    });
 
     // Touch
     canvas.addEventListener("touchstart", (e) => {
@@ -335,10 +362,14 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
     }, { passive: false });
 
-    canvas.addEventListener("touchend", () => { if (isDown){ isDown = false; maybeComplete(); } });
+    canvas.addEventListener("touchend", () => {
+      if (!isDown) return;
+      isDown = false;
+      maybeComplete();
+    });
   });
 
-  // Continue button scrolls to your real home page
+  // Continue button scrolls to your real home page (if you add it later)
   if (nextBtn){
     nextBtn.addEventListener("click", () => {
       const home = document.getElementById("home");

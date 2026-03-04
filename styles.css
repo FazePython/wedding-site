@@ -880,11 +880,13 @@ body.revealed main { opacity: 1; }
   }
 }
 
-@media (max-width: 760px){
+@media (max-width: 360px){
   .reveal__circles{
-    flex-wrap: nowrap;          /* keep 1 row */
-    gap: 12px;                  /* tighter spacing */
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0 12px;
   }
+}
 
   .scratch{
     width: 110px;               /* smaller so 3 fit */
@@ -896,4 +898,3 @@ body.revealed main { opacity: 1; }
     border-width: 6px;
     letter-spacing: 2px;
   }
-}

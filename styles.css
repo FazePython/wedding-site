@@ -768,6 +768,10 @@ body.revealed main { opacity: 1; }
   font-size: 14px;
 }
 
+/* =========================
+   REVEAL (Scratch) Section
+   ========================= */
+
 .panel.reveal{
   padding: 0;
   min-height: 100svh;
@@ -805,14 +809,16 @@ body.revealed main { opacity: 1; }
   text-transform: uppercase;
 }
 
+/* FORCE ONE ROW (desktop + mobile) */
 .reveal__circles{
   display: flex;
   gap: 18px;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* IMPORTANT: no wrapping into triangle */
 }
 
+/* The circle size is controlled ONLY here */
 .scratch{
   position: relative;
   width: 160px;
@@ -820,6 +826,7 @@ body.revealed main { opacity: 1; }
   border-radius: 999px;
   display: grid;
   place-items: center;
+  overflow: hidden; /* keeps scratch inside perfectly */
 }
 
 .scratch__under{
@@ -828,11 +835,13 @@ body.revealed main { opacity: 1; }
   display: grid;
   place-items: center;
   border-radius: 999px;
+
   font-family: var(--font);
   font-weight: 600;
   letter-spacing: 3px;
   color: var(--rose);
   font-size: 22px;
+
   border: 8px solid rgba(255,255,255,0.95);
   box-shadow: 0 20px 40px rgba(0,0,0,.08);
   background: rgba(255,255,255,0.45);
@@ -847,6 +856,7 @@ body.revealed main { opacity: 1; }
   touch-action: none;
   cursor: grab;
 }
+
 .scratch.done .scratch__canvas{
   opacity: 0;
   transition: opacity 300ms ease;
@@ -859,24 +869,20 @@ body.revealed main { opacity: 1; }
   letter-spacing: 1px;
 }
 
-.reveal__btn{
-  margin-top: 10px;
-  opacity: 0.65;
-}
-
-.reveal__btn:enabled{
-  opacity: 1;
-}
-
-/* Responsive circle sizing */
+/* Mobile: keep 3 in a row + shrink circles so they fit */
 @media (max-width: 760px){
-  .scratch, .scratch__canvas{
-    width: 140px;
-    height: 140px;
+  .reveal__circles{
+    gap: 12px;
   }
+
+  .scratch{
+    width: 108px;     /* <-- change this if you want bigger/smaller */
+    height: 108px;
+  }
+
   .scratch__under{
-    border-width: 8px;
-    font-size: 24px;
+    border-width: 7px;
+    font-size: 16px;
+    letter-spacing: 2px;
   }
 }
-

@@ -168,3 +168,181 @@ const sceneObserver = new IntersectionObserver((entries) => {
 }, { threshold: [0.55, 0.7, 0.85] });
 
 document.querySelectorAll(".panel").forEach(p => sceneObserver.observe(p));
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const curtain = document.getElementById("curtain");
+  if (!curtain) return;
+
+  const prompt = curtain.querySelector(".curtain__prompt");
+
+  // Keep page from scrolling before reveal (optional)
+  document.body.classList.add("pre-reveal");
+
+  let opened = false;
+
+  function openCurtain() {
+    if (opened) return;
+    opened = true;
+
+    curtain.classList.add("open");
+
+    // Reveal your page content shortly after animation begins
+    setTimeout(() => {
+      document.body.classList.remove("pre-reveal");
+      document.body.classList.add("revealed");
+    }, 250);
+
+    // After curtains finish, fade overlay out then remove
+    setTimeout(() => {
+      curtain.classList.add("done");
+      setTimeout(() => curtain.remove(), 300);
+    }, 1400);
+  }
+
+  // Click anywhere on the curtain to open
+  curtain.addEventListener("click", openCurtain);
+
+  // Also allow keyboard (Enter/Space) on the prompt
+  if (prompt) {
+    prompt.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openCurtain();
+      }
+    });
+  }
+});
+
+// ===== Scratch Reveal Logic =====
+(function initScratchReveal(){
+  const revealSection = document.getElementById("reveal");
+  if (!revealSection) return;
+
+  const tiles = Array.from(revealSection.querySelectorAll(".scratch"));
+  const doneText = document.getElementById("revealDone");
+  const nextBtn = document.getElementById("revealNext");
+
+  let completed = new Set();
+
+  function makeGoldTexture(ctx, w, h){
+    // simple "gold" look using gradients (no image required)
+    const g1 = ctx.createRadialGradient(w*0.35, h*0.35, 10, w*0.5, h*0.5, w*0.7);
+    g1.addColorStop(0, "#f7e2b5");
+    g1.addColorStop(0.35, "#e9c78a");
+    g1.addColorStop(0.7, "#d2a35e");
+    g1.addColorStop(1, "#f2d6a3");
+
+    const g2 = ctx.createLinearGradient(0, 0, w, h);
+    g2.addColorStop(0, "rgba(255,255,255,.35)");
+    g2.addColorStop(0.5, "rgba(0,0,0,.10)");
+    g2.addColorStop(1, "rgba(255,255,255,.25)");
+
+    ctx.fillStyle = g1;
+    ctx.fillRect(0,0,w,h);
+    ctx.fillStyle = g2;
+    ctx.fillRect(0,0,w,h);
+
+    // subtle circular "brushed metal" rings
+    ctx.globalAlpha = 0.18;
+    ctx.strokeStyle = "rgba(255,255,255,0.6)";
+    for (let r = 12; r < w/2; r += 10){
+      ctx.beginPath();
+      ctx.arc(w/2, h/2, r, 0, Math.PI*2);
+      ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  function getScratchPercent(ctx, w, h){
+    // sample pixels to estimate cleared area (fast enough for 220x220)
+    const img = ctx.getImageData(0,0,w,h).data;
+    let transparent = 0;
+    const step = 8; // sample every N pixels
+    for (let y=0; y<h; y+=step){
+      for (let x=0; x<w; x+=step){
+        const i = (y*w + x) * 4;
+        const a = img[i+3];
+        if (a === 0) transparent++;
+      }
+    }
+    const total = (Math.ceil(h/step) * Math.ceil(w/step));
+    return transparent / total;
+  }
+
+  function checkAllDone(){
+    if (completed.size === tiles.length){
+      if (doneText) doneText.hidden = false;
+      if (nextBtn){
+        nextBtn.disabled = false;
+        nextBtn.style.opacity = "1";
+      }
+    }
+  }
+
+  tiles.forEach((tile, idx) => {
+    const canvas = tile.querySelector(".scratch__canvas");
+    const ctx = canvas.getContext("2d");
+    const w = canvas.width;
+    const h = canvas.height;
+
+    // draw the gold cover
+    makeGoldTexture(ctx, w, h);
+
+    // only scratch inside the circle
+    ctx.globalCompositeOperation = "source-over";
+
+    let isDown = false;
+
+    function scratchAt(clientX, clientY){
+      const rect = canvas.getBoundingClientRect();
+      const x = (clientX - rect.left) * (w / rect.width);
+      const y = (clientY - rect.top) * (h / rect.height);
+
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.beginPath();
+      ctx.arc(x, y, 18, 0, Math.PI*2);
+      ctx.fill();
+      ctx.globalCompositeOperation = "source-over";
+    }
+
+    function maybeComplete(){
+      const pct = getScratchPercent(ctx, w, h);
+      if (pct > 0.45 && !tile.classList.contains("done")){
+        tile.classList.add("done");
+        completed.add(idx);
+        checkAllDone();
+      }
+    }
+
+    // Mouse
+    canvas.addEventListener("mousedown", (e) => { isDown = true; scratchAt(e.clientX, e.clientY); });
+    window.addEventListener("mouseup", () => { if (isDown){ isDown = false; maybeComplete(); } });
+    canvas.addEventListener("mousemove", (e) => { if (isDown) scratchAt(e.clientX, e.clientY); });
+
+    // Touch
+    canvas.addEventListener("touchstart", (e) => {
+      isDown = true;
+      const t = e.touches[0];
+      scratchAt(t.clientX, t.clientY);
+      e.preventDefault();
+    }, { passive: false });
+
+    canvas.addEventListener("touchmove", (e) => {
+      if (!isDown) return;
+      const t = e.touches[0];
+      scratchAt(t.clientX, t.clientY);
+      e.preventDefault();
+    }, { passive: false });
+
+    canvas.addEventListener("touchend", () => { if (isDown){ isDown = false; maybeComplete(); } });
+  });
+
+  // Continue button scrolls to your real home page
+  if (nextBtn){
+    nextBtn.addEventListener("click", () => {
+      const home = document.getElementById("home");
+      if (home) home.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+})();

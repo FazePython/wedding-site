@@ -879,3 +879,21 @@ body.revealed main { opacity: 1; }
     font-size: 24px;
   }
 }
+
+@media (max-width: 760px){
+  .reveal__circles{
+    flex-wrap: nowrap;          /* keep 1 row */
+    gap: 12px;                  /* tighter spacing */
+  }
+
+  .scratch{
+    width: 110px;               /* smaller so 3 fit */
+    height: 110px;
+  }
+
+  .scratch__under{
+    font-size: 16px;
+    border-width: 6px;
+    letter-spacing: 2px;
+  }
+}

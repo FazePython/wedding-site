@@ -214,16 +214,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ===== Scratch Reveal Logic (FIXED for mobile sizing + DPR) =====
+// ===== Scratch Reveal Logic (WORKING + no repaint bugs) =====
 (function initScratchReveal(){
   const revealSection = document.getElementById("reveal");
   if (!revealSection) return;
 
   const tiles = Array.from(revealSection.querySelectorAll(".scratch"));
   const doneText = document.getElementById("revealDone");
-  const nextBtn = document.getElementById("revealNext");
-
-  let completed = new Set();
+  const completed = new Set();
 
   function makeGoldTexture(ctx, w, h){
     const g1 = ctx.createRadialGradient(w*0.35, h*0.35, 10, w*0.5, h*0.5, w*0.7);
@@ -243,7 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.fillStyle = g2;
     ctx.fillRect(0,0,w,h);
 
-    // subtle circular "brushed metal" rings
     ctx.globalAlpha = 0.18;
     ctx.strokeStyle = "rgba(255,255,255,0.6)";
     for (let r = 10; r < Math.min(w,h)/2; r += 10){
@@ -257,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function getScratchPercent(ctx, w, h){
     const img = ctx.getImageData(0,0,w,h).data;
     let transparent = 0;
-    const step = 10; // bigger step = faster
+    const step = 10;
     for (let y=0; y<h; y+=step){
       for (let x=0; x<w; x+=step){
         const i = (y*w + x) * 4;
@@ -269,50 +266,60 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function checkAllDone(){
-    if (completed.size === tiles.length){
-      if (doneText) doneText.hidden = false;
-      if (nextBtn){
-        nextBtn.disabled = false;
-        nextBtn.style.opacity = "1";
-      }
-    }
+  if (completed.size !== tiles.length) return;
+
+  // show "Date revealed..."
+  if (doneText) doneText.removeAttribute("hidden");
+
+  // show "We are getting married!"
+  const marriedMsg = document.getElementById("marriedMsg");
+  if (marriedMsg){
+    marriedMsg.removeAttribute("hidden");
+
+    // force it visible (doesn't rely on CSS class)
+    marriedMsg.style.opacity = "1";
+    marriedMsg.style.transform = "none";
+
+    // optional: still add class for your animation if you want
+    marriedMsg.classList.add("show");
   }
+}
+
 
   tiles.forEach((tile, idx) => {
     const canvas = tile.querySelector(".scratch__canvas");
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
-    let opened = false;
     let isDown = false;
+    let initialized = false;
 
-    // ✅ RESIZE CANVAS TO MATCH CSS SIZE (fixes mobile circle mismatch)
-    function resizeCanvasToCSS(){
+    function initCanvas(){
+      // ✅ only initialize ONCE (prevents repaint wiping out scratches)
+      if (initialized) return;
+      initialized = true;
+
       const rect = canvas.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
 
       canvas.width = Math.round(rect.width * dpr);
       canvas.height = Math.round(rect.height * dpr);
 
-      // scale drawing so 1 unit = 1 CSS pixel
+      // scale so drawing uses CSS pixels
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // draw cover using CSS pixel sizes
+      // draw the gold cover
       makeGoldTexture(ctx, rect.width, rect.height);
-
-      // reset to normal mode after drawing cover
       ctx.globalCompositeOperation = "source-over";
     }
 
-    // initial draw (slight delay helps if fonts/layout still loading)
-    setTimeout(resizeCanvasToCSS, 50);
-    window.addEventListener("resize", resizeCanvasToCSS, { passive: true });
-
     function scratchAt(clientX, clientY){
-      const rect = canvas.getBoundingClientRect();
-      const x = (clientX - rect.left);
-      const y = (clientY - rect.top);
+      initCanvas(); // ensure ready before first scratch
 
-      const brush = rect.width < 130 ? 10 : 12; // smaller brush on mobile
+      const rect = canvas.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+
+      const brush = rect.width < 130 ? 18 : 22;
 
       ctx.globalCompositeOperation = "destination-out";
       ctx.beginPath();
@@ -321,27 +328,36 @@ document.addEventListener("DOMContentLoaded", () => {
       ctx.globalCompositeOperation = "source-over";
     }
 
-    function maybeComplete(){
-      const pct = getScratchPercent(ctx, canvas.width, canvas.height);
-      if (pct > 0.45 && !tile.classList.contains("done")){
-        tile.classList.add("done");
-        completed.add(idx);
-        checkAllDone();
-      }
-    }
+   function maybeComplete(){
+  const pct = getScratchPercent(ctx, canvas.width, canvas.height);
+
+  // ✅ super easy threshold
+  if (pct >= 0.15 && !tile.classList.contains("done")) {
+
+    // ✅ remove ALL brush marks instantly (full reveal)
+    ctx.save();
+    ctx.setTransform(1,0,0,1,0,0); // in case transform is applied
+    ctx.globalCompositeOperation = "source-over";
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+
+    tile.classList.add("done");
+    completed.add(idx);
+    checkAllDone();
+    console.log("ALL DONE ✅", completed.size, tiles.length);
+  }
+}
 
     // Mouse
     canvas.addEventListener("mousedown", (e) => {
       isDown = true;
       scratchAt(e.clientX, e.clientY);
     });
-
     window.addEventListener("mouseup", () => {
       if (!isDown) return;
       isDown = false;
       maybeComplete();
     });
-
     canvas.addEventListener("mousemove", (e) => {
       if (!isDown) return;
       scratchAt(e.clientX, e.clientY);
@@ -367,13 +383,11 @@ document.addEventListener("DOMContentLoaded", () => {
       isDown = false;
       maybeComplete();
     });
-  });
 
-  // Continue button scrolls to your real home page (if you add it later)
-  if (nextBtn){
-    nextBtn.addEventListener("click", () => {
-      const home = document.getElementById("home");
-      if (home) home.scrollIntoView({ behavior: "smooth" });
-    });
-  }
+    // ✅ initialize after layout settles (so it's already covered before first touch)
+    requestAnimationFrame(() => requestAnimationFrame(initCanvas));
+  });
 })();
+
+
+

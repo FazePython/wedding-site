@@ -717,7 +717,7 @@ body.revealed main { opacity: 1; }
   font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--rose2);
+  color: #fff;
 }
 
 .hero__names{
@@ -728,7 +728,7 @@ body.revealed main { opacity: 1; }
   line-height: 1.05;                 /* same as .names */
   font-size: clamp(46px, 6vw, 84px); /* same as .names */
   text-transform: uppercase;         /* same as .names */
-  color: var(--rose);
+  color: #fff;
   margin-bottom: 80px; /* try 60px–140px */
 }
 
@@ -966,4 +966,38 @@ body.revealed main { opacity: 1; }
   color: var(--rose);
   letter-spacing: 2px;
   font-weight: 600;
+}
+
+/* ===== Home-only video background ===== */
+.panel.hero{
+  position: relative;   /* needed so video stays inside home only */
+  overflow: hidden;     /* crops video nicely */
+}
+
+.homeVideo{
+  position: absolute;
+  inset: 0;
+  z-index: 0;           /* behind hero content */
+  pointer-events: none;
+}
+
+.homeVideo__vid{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* keep all hero content above the video */
+.hero__inner{
+  position: relative;
+  z-index: 2;
+}
+
+/* optional: soften video so text stays readable */
+.homeVideo::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,254,249,0.25); /* tweak or remove */
 }

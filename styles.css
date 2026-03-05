@@ -743,7 +743,7 @@ body.revealed main { opacity: 1; }
   font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--rose2);
+  color: #fff;
   line-height: 1.7;
   align-self: end;
   max-width: 95ch;
@@ -1001,3 +1001,4 @@ body.revealed main { opacity: 1; }
   inset: 0;
   background: rgba(255,254,249,0.25); /* tweak or remove */
 }
+

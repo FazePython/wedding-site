@@ -835,7 +835,7 @@ body.revealed main { opacity: 1; }
   display: grid;
   place-items: center;
   border-radius: 999px;
-
+  z-index: 1; 
   font-family: var(--font);
   font-weight: 600;
   letter-spacing: 3px;
@@ -854,6 +854,7 @@ body.revealed main { opacity: 1; }
   height: 100%;
   border-radius: 999px;
   touch-action: none;
+  z-index: 2; 
   cursor: grab;
 }
 
@@ -885,4 +886,84 @@ body.revealed main { opacity: 1; }
     font-size: 16px;
     letter-spacing: 2px;
   }
+}
+
+
+.reveal__married{
+  margin: 18px 0 0;
+  font-family: var(--font);
+  color: var(--rose);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 14px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 350ms ease, transform 350ms ease;
+   position: relative;
+  z-index: 10;
+}
+
+.reveal__married.show{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   GIFTS panel
+   ========================= */
+.gifts{
+  text-align: center;
+}
+
+.gifts__kicker,
+.gifts__subkicker{
+  margin: 0 0 14px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--rose2);
+}
+
+.gifts__icon{
+  display: block;
+  margin: 6px auto 18px;
+  width: 86px;          /* adjust */
+  height: auto;
+  opacity: 0.95;
+}
+
+.gifts__title{
+  margin: 0 0 18px;
+}
+
+.gifts__copy{
+  max-width: 62ch;
+}
+
+.gifts__love{
+  margin: 44px 0 34px;
+  font-family: var(--font);
+  font-size: clamp(26px, 3.5vw, 38px);
+  letter-spacing: 1px;
+  color: var(--rose);
+}
+
+.gifts__box{
+  width: min(520px, 92%);
+  margin: 12px auto 0;
+  padding: 20px 18px;
+  border: 1px solid rgba(155,100,89,0.35);
+  background: rgba(255,254,249,0.75);
+}
+
+.gifts__box p{
+  margin: 10px 0;
+  color: var(--rose2);
+  letter-spacing: 1px;
+}
+
+.gifts__box b{
+  color: var(--rose);
+  letter-spacing: 2px;
+  font-weight: 600;
 }

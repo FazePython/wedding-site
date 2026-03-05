@@ -718,6 +718,7 @@ body.revealed main { opacity: 1; }
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #fff;
+  margin: 0 0 60px; /* increase this (ex: 50px, 60px) */
 }
 
 .hero__names{
@@ -1002,3 +1003,144 @@ body.revealed main { opacity: 1; }
   background: rgba(255,254,249,0.25); /* tweak or remove */
 }
 
+/* =========================
+   LAST PAGE: Night skyline hero
+   ========================= */
+.panel.nightHero{
+  padding: 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+}
+
+/* soft dark overlay so white text reads well */
+.panel.nightHero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index: 0;
+}
+
+/* subtle star speckle overlay (no image needed) */
+.panel.nightHero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity: .35;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.nightHero__inner{
+  position: relative;
+  z-index: 1;
+  width: min(980px, 92vw);
+  text-align: center;
+  padding: 160px 0 90px; /* room for your top header */
+  color: #fff;
+}
+
+.nightHero__kicker{
+  margin: 0 0 18px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: .9;
+}
+
+.nightHero__names{
+  margin: 0 0 12px;
+  font-family: var(--font);
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: none; /* change to uppercase if you want */
+  font-size: clamp(44px, 5.2vw, 84px); 
+  color: #fff;
+}
+
+.nightHero__meta{
+  margin: 0 0 26px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: .85;
+}
+
+.nightHero__arabic{
+  margin: 10px 0 10px;
+  font-size: clamp(28px, 3.5vw, 44px);
+  line-height: 1.15;
+  color: #fff;
+  /* If you later add an Arabic font, it will look even better */
+}
+
+.nightHero__quote{
+  margin: 0 0 40px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: .85;
+}
+
+.nightHero__links{
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Make the fixed header buttons readable on this dark page */
+body.scene-final .mark,
+body.scene-final .rsvpTop{
+  color: var(--rose);
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* =========================
+   LAST PAGE video background
+   ========================= */
+#final{
+  position: relative;
+  overflow: hidden;
+}
+
+.finalVideo{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.finalVideo__vid{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* optional dark overlay for readability */
+#final::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index: 1;
+  background: linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.55));
+}
+
+/* keep your text above the video */
+#final .nightHero__inner{
+  position: relative;
+  z-index: 2;
+}
+
+/* make sure panels can truly fill the screen */
+.panel{
+  width: 100%;
+}
+
+/* final must always be full viewport height */
+#final{
+  min-height: 100svh;
+  width: 100%;
+}

@@ -714,7 +714,7 @@ body.revealed main { opacity: 1; }
 
 .hero__topline{
   margin: 0;
-  font-size: 12px;
+  font-size: 20px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #fff;
@@ -741,7 +741,7 @@ body.revealed main { opacity: 1; }
 
 .hero__bottomline{
   margin: 0;
-  font-size: 12px;
+  font-size: 20px;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #fff;
@@ -1000,7 +1000,7 @@ body.revealed main { opacity: 1; }
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,254,249,0.25); /* tweak or remove */
+  /*background: rgba(255,254,249,0.25); /* tweak or remove */
 }
 
 /* =========================
@@ -1064,8 +1064,9 @@ body.revealed main { opacity: 1; }
   margin: 0 0 26px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 18px;
   opacity: .85;
+   color: #fff;
 }
 
 .nightHero__arabic{
@@ -1073,6 +1074,7 @@ body.revealed main { opacity: 1; }
   font-size: clamp(28px, 3.5vw, 44px);
   line-height: 1.15;
   color: #fff;
+  .italic{ font-style: italic; }
   /* If you later add an Arabic font, it will look even better */
 }
 
@@ -1094,7 +1096,7 @@ body.revealed main { opacity: 1; }
 body.scene-final .mark,
 body.scene-final .rsvpTop{
   color: var(--rose);
-  border-color: rgba(255,255,255,0.25);
+  
 }
 
 /* =========================
@@ -1119,13 +1121,19 @@ body.scene-final .rsvpTop{
   object-position: center;
 }
 
-/* optional dark overlay for readability */
+
+/* FINAL page readability overlay (THIS is what makes white text readable) */
 #final::before{
   content:"";
   position:absolute;
   inset:0;
   z-index: 1;
-  background: linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.55));
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.55),
+    rgba(0,0,0,.35) 40%,
+    rgba(0,0,0,.65)
+  );
 }
 
 /* keep your text above the video */

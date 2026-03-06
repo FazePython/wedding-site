@@ -12,21 +12,27 @@
 
   <link rel="stylesheet" href="./styles.css" />
 </head>
+  
+<body>
+  <!-- Curtain overlay -->
+  <div id="curtain" class="curtain curtainVideo" aria-hidden="true">
+    <video id="curtainVid" class="curtainVideo__vid" playsinline muted preload="auto" autoplay>
+      <source src="./florals/curtains.webm" type="video/webm" />
+      <source src="./florals/curtains.mp4" type="video/mp4" />
+    </video>
 
-    <!-- Curtain overlay (ADD THIS RIGHT HERE) -->
-  <div id="curtain" class="curtain" aria-hidden="true">
-    <div class="curtain__panel curtain__panel--left"></div>
-    <div class="curtain__panel curtain__panel--right"></div>
-    <div class="curtain__valance"></div>
     <div class="curtain__prompt" role="button" tabindex="0" aria-label="Click to open">
-  Click to open
-</div>
+      Click to open
+    </div>
   </div>
 
+  <!-- Music -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="./florals/song.mp3" type="audio/mpeg">
+  </audio>
 
-  <!-- Minimal corner header -->
-  <header class="top">
-  </header>
+  <!-- the rest of your page -->
+  
 
   <aside class="dots" aria-label="Sections">
   <a class="dot active" href="#home" aria-label="Home"></a>
@@ -46,7 +52,7 @@
     <section class="panel hero" id="home">
       <div class="homeVideo" aria-hidden="true">
   <video class="homeVideo__vid" autoplay muted loop playsinline preload="auto">
-    <source src="./frames/cherry1.mp4" type="video/mp4" />
+    <source src="./florals/cherry1.mp4" type="video/mp4" />
   </video>
 </div>
   <div class="hero__inner">
@@ -71,7 +77,11 @@
 
 <section class="panel reveal" id="reveal">
 
-
+  <div class="confettiFx" aria-hidden="true">
+  <video id="confettiVid" class="confettiFx__vid" playsinline muted preload="auto">
+    <source src="./florals/confetti.mp4" type="video/mp4" />
+  </video>
+</div>
 
   <div class="reveal__inner">
     <p class="reveal__hint">Scratch all three circles to continue</p>
@@ -240,7 +250,7 @@
       <section class="panel nightHero" id="final">
   <div class="finalVideo" aria-hidden="true">
     <video class="finalVideo__vid" autoplay muted loop playsinline preload="auto">
-      <source src="./frames/cherry7.mp4" type="video/mp4" />
+      <source src="./florals/cherry2.mp4" type="video/mp4" />
     </video>
   </div>
 
@@ -272,5 +282,3 @@
   <script src="./script.js"></script>
 </body>
 </html>
-
-

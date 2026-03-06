@@ -879,7 +879,7 @@ body.revealed main { opacity: 1; }
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(0,0,0,0.18);
+  
 }
   /*background: rgba(255,254,249,0.25); /* tweak or remove */
 
@@ -1061,4 +1061,5 @@ body.scene-final .rsvpTop{
   height: 100%;
   object-fit: cover;
 }
+
 

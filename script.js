@@ -221,7 +221,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const tiles = Array.from(revealSection.querySelectorAll(".scratch"));
   const doneText = document.getElementById("revealDone");
+  const marriedMsg = document.getElementById("marriedMsg");
+
   const completed = new Set();
+
+  // how much must be scratched off per circle to count as "done"
+  const COMPLETE_THRESHOLD = 0.55; // 55% scratched
 
   function makeGoldTexture(ctx, w, h){
     const g1 = ctx.createRadialGradient(w*0.35, h*0.35, 10, w*0.5, h*0.5, w*0.7);
@@ -251,40 +256,34 @@ document.addEventListener("DOMContentLoaded", () => {
     ctx.globalAlpha = 1;
   }
 
+  // IMPORTANT: w/h MUST be CSS pixel size (rect.width/rect.height)
   function getScratchPercent(ctx, w, h){
     const img = ctx.getImageData(0,0,w,h).data;
     let transparent = 0;
-    const step = 10;
+
+    // sample grid: smaller number = more accurate but more CPU
+    const step = 6;
+
     for (let y=0; y<h; y+=step){
       for (let x=0; x<w; x+=step){
         const i = (y*w + x) * 4;
         if (img[i+3] === 0) transparent++;
       }
     }
+
     const total = (Math.ceil(h/step) * Math.ceil(w/step));
     return transparent / total;
   }
 
   function checkAllDone(){
-  if (completed.size !== tiles.length) return;
+    if (completed.size !== tiles.length) return;
 
-  // show "Date revealed..."
-  if (doneText) doneText.removeAttribute("hidden");
-
-  // show "We are getting married!"
-  const marriedMsg = document.getElementById("marriedMsg");
-  if (marriedMsg){
-    marriedMsg.removeAttribute("hidden");
-
-    // force it visible (doesn't rely on CSS class)
-    marriedMsg.style.opacity = "1";
-    marriedMsg.style.transform = "none";
-
-    // optional: still add class for your animation if you want
-    marriedMsg.classList.add("show");
+    if (doneText) doneText.removeAttribute("hidden");
+    if (marriedMsg){
+      marriedMsg.removeAttribute("hidden");
+      marriedMsg.classList.add("show");
+    }
   }
-}
-
 
   tiles.forEach((tile, idx) => {
     const canvas = tile.querySelector(".scratch__canvas");
@@ -293,69 +292,92 @@ document.addEventListener("DOMContentLoaded", () => {
     let isDown = false;
     let initialized = false;
 
+    let rectW = 0;
+    let rectH = 0;
+
+    let lastX = null;
+    let lastY = null;
+
     function initCanvas(){
-      // ✅ only initialize ONCE (prevents repaint wiping out scratches)
       if (initialized) return;
       initialized = true;
 
       const rect = canvas.getBoundingClientRect();
       const dpr = window.devicePixelRatio || 1;
 
-      canvas.width = Math.round(rect.width * dpr);
-      canvas.height = Math.round(rect.height * dpr);
+      rectW = Math.round(rect.width);
+      rectH = Math.round(rect.height);
 
-      // scale so drawing uses CSS pixels
+      canvas.width = Math.round(rectW * dpr);
+      canvas.height = Math.round(rectH * dpr);
+
+      // draw in CSS pixels
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // draw the gold cover
-      makeGoldTexture(ctx, rect.width, rect.height);
+      makeGoldTexture(ctx, rectW, rectH);
       ctx.globalCompositeOperation = "source-over";
     }
 
     function scratchAt(clientX, clientY){
-      initCanvas(); // ensure ready before first scratch
+      initCanvas();
 
       const rect = canvas.getBoundingClientRect();
       const x = clientX - rect.left;
       const y = clientY - rect.top;
 
-      const brush = rect.width < 130 ? 18 : 22;
+      const brush = rect.width < 130 ? 26 : 34; // BIGGER brush
 
       ctx.globalCompositeOperation = "destination-out";
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.lineWidth = brush * 2;
+
+      // smooth stroke between points (feels way better)
+      if (lastX === null){
+        lastX = x; lastY = y;
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+
+      // also “dab” at point (fills gaps)
       ctx.beginPath();
       ctx.arc(x, y, brush, 0, Math.PI*2);
       ctx.fill();
+
       ctx.globalCompositeOperation = "source-over";
+
+      lastX = x; lastY = y;
     }
 
-   function maybeComplete(){
-  const pct = getScratchPercent(ctx, canvas.width, canvas.height);
+    function maybeComplete(){
+      if (tile.classList.contains("done")) return;
 
-  // ✅ super easy threshold
-  if (pct >= 0.15 && !tile.classList.contains("done")) {
+      // KEY FIX: use CSS size rectW/rectH, not canvas.width/height
+      const pct = getScratchPercent(ctx, rectW, rectH);
 
-    // ✅ remove ALL brush marks instantly (full reveal)
-    ctx.save();
-    ctx.setTransform(1,0,0,1,0,0); // in case transform is applied
-    ctx.globalCompositeOperation = "source-over";
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.restore();
+      if (pct >= COMPLETE_THRESHOLD){
+        // fully clear instantly
+        ctx.clearRect(0, 0, rectW, rectH);
 
-    tile.classList.add("done");
-    completed.add(idx);
-    checkAllDone();
-    console.log("ALL DONE ✅", completed.size, tiles.length);
-  }
-}
+        tile.classList.add("done");
+        completed.add(idx);
+        checkAllDone();
+      }
+    }
 
     // Mouse
     canvas.addEventListener("mousedown", (e) => {
       isDown = true;
+      lastX = lastY = null;
       scratchAt(e.clientX, e.clientY);
     });
     window.addEventListener("mouseup", () => {
       if (!isDown) return;
       isDown = false;
+      lastX = lastY = null;
       maybeComplete();
     });
     canvas.addEventListener("mousemove", (e) => {
@@ -366,6 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Touch
     canvas.addEventListener("touchstart", (e) => {
       isDown = true;
+      lastX = lastY = null;
       const t = e.touches[0];
       scratchAt(t.clientX, t.clientY);
       e.preventDefault();
@@ -381,10 +404,10 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.addEventListener("touchend", () => {
       if (!isDown) return;
       isDown = false;
+      lastX = lastY = null;
       maybeComplete();
     });
 
-    // ✅ initialize after layout settles (so it's already covered before first touch)
     requestAnimationFrame(() => requestAnimationFrame(initCanvas));
   });
 })();

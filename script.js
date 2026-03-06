@@ -174,43 +174,62 @@ document.addEventListener("DOMContentLoaded", () => {
   const curtain = document.getElementById("curtain");
   if (!curtain) return;
 
+  const vid = document.getElementById("curtainVid");
   const prompt = curtain.querySelector(".curtain__prompt");
+  const bgMusic = document.getElementById("bgMusic");
 
-  // Keep page from scrolling before reveal (optional)
   document.body.classList.add("pre-reveal");
+
+  // play curtain once
+  if (vid){
+    vid.loop = false;
+    vid.currentTime = 0;
+    vid.play().catch(()=>{});
+  }
 
   let opened = false;
 
-  function openCurtain() {
+  async function startMusic(){
+    if (!bgMusic) return;
+    bgMusic.volume = 0.35;
+
+    try {
+      await bgMusic.play();
+    } catch (e) {
+      // Don’t silence forever—log so you can see if it’s blocked / 404
+      console.log("Music play blocked or failed:", e);
+    }
+  }
+
+  function openCurtain(){
     if (opened) return;
     opened = true;
 
+    // ✅ Start music on the SAME click/tap gesture
+    startMusic();
+
     curtain.classList.add("open");
 
-    // Reveal your page content shortly after animation begins
     setTimeout(() => {
       document.body.classList.remove("pre-reveal");
       document.body.classList.add("revealed");
-    }, 250);
+    }, 120);
 
-    // After curtains finish, fade overlay out then remove
-    setTimeout(() => {
-      curtain.classList.add("done");
-      setTimeout(() => curtain.remove(), 300);
-    }, 1400);
+    setTimeout(() => curtain.remove(), 520);
   }
 
-  // Click anywhere on the curtain to open
-  curtain.addEventListener("click", openCurtain);
-
-  // Also allow keyboard (Enter/Space) on the prompt
-  if (prompt) {
+  // IMPORTANT: open ONLY when clicking the prompt (so you don’t accidentally open instantly)
+  if (prompt){
+    prompt.addEventListener("click", openCurtain);
     prompt.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         openCurtain();
       }
     });
+  } else {
+    // fallback
+    curtain.addEventListener("click", openCurtain);
   }
 });
 
@@ -276,14 +295,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function checkAllDone(){
-    if (completed.size !== tiles.length) return;
+  if (completed.size !== tiles.length) return;
 
-    if (doneText) doneText.removeAttribute("hidden");
-    if (marriedMsg){
-      marriedMsg.removeAttribute("hidden");
-      marriedMsg.classList.add("show");
-    }
+  if (doneText) doneText.removeAttribute("hidden");
+  if (marriedMsg){
+    marriedMsg.removeAttribute("hidden");
+    marriedMsg.classList.add("show");
   }
+
+  const confettiWrap = document.querySelector("#reveal .confettiFx");
+  const confettiVid  = document.getElementById("confettiVid");
+  if (confettiWrap && confettiVid){
+    confettiWrap.classList.add("on");
+    confettiVid.pause();
+    confettiVid.currentTime = 0;
+    confettiVid.play().catch(()=>{});
+    setTimeout(() => confettiWrap.classList.remove("on"), 4500);
+  }
+}
 
   tiles.forEach((tile, idx) => {
     const canvas = tile.querySelector(".scratch__canvas");

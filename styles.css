@@ -260,6 +260,8 @@ h2{
 /* =========================
    Countdown
    ========================= */
+
+#countdown[hidden] { display: none !important; }
 .count{
   display: flex;
   gap: 10px;
@@ -1062,6 +1064,7 @@ body.scene-final .rsvpTop{
   height: 100%;
   object-fit: cover;
 }
+
 
 
 

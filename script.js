@@ -451,6 +451,46 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 
+document.addEventListener("DOMContentLoaded", () => {
+  const intro = document.getElementById("introEnvelope");
+  const btn = document.getElementById("openEnvelopeBtn");
+  const bgMusic = document.getElementById("bgMusic");
+
+  if (!intro || !btn) return;
+
+  document.body.classList.add("pre-reveal");
+
+  let opened = false;
+
+  async function startMusic() {
+    if (!bgMusic) return;
+    bgMusic.volume = 0.35;
+    try {
+      await bgMusic.play();
+    } catch (e) {
+      console.log("Music play blocked or failed:", e);
+    }
+  }
+
+  btn.addEventListener("click", async () => {
+    if (opened) return;
+    opened = true;
+
+    await startMusic();
+
+    intro.classList.add("is-opening");
+    document.body.classList.remove("pre-reveal");
+    document.body.classList.add("revealed");
+
+    setTimeout(() => {
+      intro.classList.add("is-done");
+    }, 1400);
+
+    setTimeout(() => {
+      intro.remove();
+    }, 2200);
+  });
+});
 
 
 

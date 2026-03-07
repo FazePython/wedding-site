@@ -15,16 +15,27 @@
   
 <body>
   <!-- Curtain overlay -->
-  <div id="curtain" class="curtain curtainVideo" aria-hidden="true">
-    <video id="curtainVid" class="curtainVideo__vid" playsinline muted preload="auto" autoplay>
-      <source src="./frames/curtains.webm" type="video/webm" />
-      <source src="./frames/curtains.mp4" type="video/mp4" />
-    </video>
+  <<div id="introEnvelope" class="introEnvelope">
+  <div class="introEnvelope__center">
+    <button class="introEnvelope__button" id="openEnvelopeBtn" type="button">
+      Open Invitation
+    </button>
 
-    <div class="curtain__prompt" role="button" tabindex="0" aria-label="Click to open">
-      Click to open
+    <div class="envelope" aria-hidden="true">
+      <div class="envelope__back"></div>
+      <div class="envelope__letter">
+        <div class="envelope__letterInner">
+          <p class="envelope__eyebrow">You are invited</p>
+          <h2 class="envelope__title">Zahin &amp; Faizan</h2>
+          <p class="envelope__date">October 4, 2026 · Dallas, Texas</p>
+        </div>
+      </div>
+
+      <div class="envelope__front"></div>
+      <div class="envelope__flap"></div>
     </div>
   </div>
+</div>
 
   <!-- Music -->
   <audio id="bgMusic" loop preload="auto">
@@ -288,6 +299,7 @@
   <script src="./script.js"></script>
 </body>
 </html>
+
 
 
 

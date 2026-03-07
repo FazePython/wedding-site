@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const completed = new Set();
 
   // how much must be scratched off per circle to count as "done"
-  const COMPLETE_THRESHOLD = 0.35; // 55% scratched
+  const COMPLETE_THRESHOLD = 0.20; // 55% scratched
 
   function makeGoldTexture(ctx, w, h){
     const g1 = ctx.createRadialGradient(w*0.35, h*0.35, 10, w*0.5, h*0.5, w*0.7);
@@ -450,6 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(() => requestAnimationFrame(initCanvas));
   });
 })();
+
 
 
 

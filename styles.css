@@ -687,14 +687,14 @@ body.revealed main { opacity: 1; }
   font-family: var(--font);
   font-weight: 400;
   font-size: clamp(44px, 5vw, 68px);
-  color: rgb(228, 124, 221);
+  color: var(--rose3);
 }
 
 .reveal__subtitle{
   margin: 10px 0 34px;
   font-size: 17px;
   letter-spacing: 3px;
-  color: #b958b1;
+  color: var(--rose3);
   text-transform: uppercase;
 }
 
@@ -1256,3 +1256,4 @@ body.scene-final .rsvpTop{
     transform: translateX(-50%) translateY(-80px);
   }
 }
+

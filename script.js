@@ -1,6 +1,10 @@
-// Countdown (Central Time) — starts at 7:00 PM CDT for Oct 4, 2026
+
 const jsConfetti = new JSConfetti(); // creates its own canvas overlay
+// Countdown (Central Time) — starts at 7:00 PM CDT for Oct 4, 2026
+// Countdown (Central Time) — starts at 7:00 PM CDT for Oct 4, 2026
 const weddingDate = new Date("2026-10-04T19:00:00-05:00");
+
+const countdownWrap = document.getElementById("countdown");
 const d = document.getElementById("d");
 const h = document.getElementById("h");
 const m = document.getElementById("m");
@@ -14,9 +18,9 @@ function tick(){
 
   if (diff <= 0){
     if (d) d.textContent = "0";
-    if (h) h.textContent = "0";
-    if (m) m.textContent = "0";
-    if (s) s.textContent = "0";
+    if (h) h.textContent = "00";
+    if (m) m.textContent = "00";
+    if (s) s.textContent = "00";
     return;
   }
 
@@ -36,8 +40,14 @@ function tick(){
   if (m) m.textContent = pad(mins);
   if (s) s.textContent = pad(secs);
 }
-tick();
-setInterval(tick, 1000);
+
+let countdownTimer = null;
+function startCountdown(){
+  if (countdownTimer) return;          // only start once
+  if (countdownWrap) countdownWrap.hidden = false; // ✅ show only now
+  tick();                               // ✅ first update only now
+  countdownTimer = setInterval(tick, 1000);
+}
 
 // ===============================
 // Background frames (Night builds)
@@ -246,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const completed = new Set();
 
   // how much must be scratched off per circle to count as "done"
-  const COMPLETE_THRESHOLD = 0.55; // 55% scratched
+  const COMPLETE_THRESHOLD = 0.35; // 55% scratched
 
   function makeGoldTexture(ctx, w, h){
     const g1 = ctx.createRadialGradient(w*0.35, h*0.35, 10, w*0.5, h*0.5, w*0.7);
@@ -282,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let transparent = 0;
 
     // sample grid: smaller number = more accurate but more CPU
-    const step = 6;
+    const step = 10;
 
     for (let y=0; y<h; y+=step){
       for (let x=0; x<w; x+=step){
@@ -309,7 +319,9 @@ document.addEventListener("DOMContentLoaded", () => {
     confettiRadius: 5,
     confettiColors: ['#ff4f8b', '#ff7fb0', '#ffd1e1', '#ffffff'],
   }).catch(()=>{});
-    
+  startCountdown();
+
+
 }
 
   tiles.forEach((tile, idx) => {
@@ -438,7 +450,6 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(() => requestAnimationFrame(initCanvas));
   });
 })();
-
 
 
 

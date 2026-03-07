@@ -668,7 +668,7 @@ body.revealed main { opacity: 1; }
 
 .reveal__hint{
   margin: 0 0 18px;
-  font-size: 12px;
+  font-size: 18px;
   letter-spacing: 2px;
   color: var(--rose3);
   text-transform: uppercase;
@@ -1064,6 +1064,7 @@ body.scene-final .rsvpTop{
   height: 100%;
   object-fit: cover;
 }
+
 
 
 

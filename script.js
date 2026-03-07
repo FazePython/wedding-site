@@ -1,4 +1,5 @@
 // Countdown (Central Time) — starts at 7:00 PM CDT for Oct 4, 2026
+const jsConfetti = new JSConfetti(); // creates its own canvas overlay
 const weddingDate = new Date("2026-10-04T19:00:00-05:00");
 const d = document.getElementById("d");
 const h = document.getElementById("h");
@@ -302,16 +303,13 @@ document.addEventListener("DOMContentLoaded", () => {
     marriedMsg.removeAttribute("hidden");
     marriedMsg.classList.add("show");
   }
-
-  const confettiWrap = document.querySelector("#reveal .confettiFx");
-  const confettiVid  = document.getElementById("confettiVid");
-  if (confettiWrap && confettiVid){
-    confettiWrap.classList.add("on");
-    confettiVid.pause();
-    confettiVid.currentTime = 0;
-    confettiVid.play().catch(()=>{});
-    setTimeout(() => confettiWrap.classList.remove("on"), 4500);
-  }
+// ✅ NEW: fire confetti at the same moment
+  jsConfetti.addConfetti({
+    confettiNumber: 260,
+    confettiRadius: 5,
+    confettiColors: ['#ff4f8b', '#ff7fb0', '#ffd1e1', '#ffffff'],
+  }).catch(()=>{});
+    
 }
 
   tiles.forEach((tile, idx) => {
@@ -440,6 +438,7 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(() => requestAnimationFrame(initCanvas));
   });
 })();
+
 
 
 

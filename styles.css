@@ -1325,23 +1325,6 @@ body.scene-final .rsvpTop{
   z-index: 4;
 }
 
-@media (max-width: 640px){
-  .envelope__seal{
-    width: 66px;
-    height: 66px;
-    font-size: 13px;
-  }
-
-  .envelope__letter{
-    width: 92%;
-    height: 76%;
-    transform: translateX(-50%) translateY(50px);
-  }
-
-  .introEnvelope.is-opening .envelope__letter{
-    transform: translateX(-50%) translateY(-24px);
-  }
-}
 
 .hero__topline,
 .hero__names,
@@ -1349,3 +1332,4 @@ body.scene-final .rsvpTop{
 .hero__scroll{
   text-shadow: 0 2px 10px rgba(0,0,0,0.30);
 }
+

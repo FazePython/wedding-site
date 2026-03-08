@@ -1333,5 +1333,14 @@ body.scene-final .rsvpTop{
   text-shadow: 0 2px 10px rgba(0,0,0,0.30);
 }
 
+@media (max-width: 640px){
+  .envelope__seal{
+    width: 54px;
+    height: 54px;
+    font-size: 12px;
+    top: 58%;
+  }
+}
+
 
 

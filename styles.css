@@ -1322,7 +1322,7 @@ body.scene-final .rsvpTop{
 /* card rises but stays partly hidden by front pocket */
 .introEnvelope.is-opening .envelope__letter{
   transform: translateX(-50%) translateY(-150px);
-  z-index: 4;
+  z-index: 7;
 }
 
 
@@ -1332,4 +1332,5 @@ body.scene-final .rsvpTop{
 .hero__scroll{
   text-shadow: 0 2px 10px rgba(0,0,0,0.30);
 }
+
 

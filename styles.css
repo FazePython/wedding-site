@@ -1283,7 +1283,7 @@ body.scene-final .rsvpTop{
 .envelope__seal{
   position: absolute;
   left: 50%;
-  top: 52%;
+  top: 60%;
   transform: translate(-50%, -50%);
   z-index: 9;
   width: 74px;
@@ -1332,5 +1332,6 @@ body.scene-final .rsvpTop{
 .hero__scroll{
   text-shadow: 0 2px 10px rgba(0,0,0,0.30);
 }
+
 
 

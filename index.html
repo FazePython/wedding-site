@@ -14,15 +14,12 @@
 </head>
   
 <body>
-  <!-- Curtain overlay -->
+
   <div id="introEnvelope" class="introEnvelope">
   <div class="introEnvelope__center">
-    <button class="introEnvelope__button" id="openEnvelopeBtn" type="button">
-      Open Invitation
-    </button>
-
     <div class="envelope" aria-hidden="true">
       <div class="envelope__back"></div>
+
       <div class="envelope__letter">
         <div class="envelope__letterInner">
           <p class="envelope__eyebrow">You are invited</p>
@@ -32,14 +29,20 @@
       </div>
 
       <div class="envelope__front"></div>
+      <div class="envelope__topCover"></div>
       <div class="envelope__flap"></div>
+
+      <button class="envelope__seal" id="openEnvelopeBtn" type="button">
+        Open
+      </button>
     </div>
   </div>
 </div>
 
+
   <!-- Music -->
   <audio id="bgMusic" loop preload="auto">
-    <source src="./frames/song.mp3" type="audio/mpeg">
+    <source src="./florals/song.mp3" type="audio/mpeg">
   </audio>
 
   <!-- the rest of your page -->
@@ -90,15 +93,15 @@
 
   <div class="confettiFx" aria-hidden="true">
   <video id="confettiVid" class="confettiFx__vid" playsinline muted preload="auto">
-    <source src="./florals/confetti.mp4" type="video/mp4" />
+    <source src="./frames/confetti.mp4" type="video/mp4" />
   </video>
 </div>
 
   <div class="reveal__inner">
-    <p class="reveal__hint">Fully Scratch all three circles for a surprise</p>
+    <p class="reveal__hint">Scratch all three circles to continue</p>
 
     <h1 class="reveal__title">Reveal</h1>
-   
+    
 
     <div class="reveal__circles" aria-label="Scratch to reveal date">
       <div class="scratch" data-i="0" aria-label="Scratch circle 1">
@@ -117,12 +120,16 @@
       </div>
     </div>
 
-
+     <p class="reveal__done" id="revealDone" hidden>
+      Date revealed: <b>October 4th, 2026</b>
+    </p>
 
     <p class="reveal__married" id="marriedMsg" hidden>
      We are getting married!
     </p>
-<div class="count" id="countdown" hidden>
+
+
+    <div class="count" id="countdown" hidden>
   <span><b id="d">0</b> DAYS</span>
   <span class="sep">·</span>
   <span><b id="h">00</b> HRS</span>
@@ -131,6 +138,7 @@
   <span class="sep">·</span>
   <span><b id="s">00</b> SEC</span>
 </div>
+
   </div>
 </section>
 
@@ -281,7 +289,7 @@
       فِي الدُّنْيَا وَالْآخِرَةِ
     </div>
 
-    <p class="nightHero__quote">“In this World and the Hereafter”</p>
+    <span class="quoteItalic">In this World and the Hereafter</span>
 
     <div class="nightHero__links">
       
@@ -295,19 +303,7 @@
       </div>
     </section>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
   <script src="./script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-

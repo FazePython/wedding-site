@@ -191,46 +191,64 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.body.classList.add("pre-reveal");
 
-  // play curtain once
-  if (vid){
-    vid.loop = false;
-    vid.currentTime = 0;
-    vid.play().catch(()=>{});
-  }
-
   let opened = false;
 
-  async function startMusic(){
+  async function startMusic() {
     if (!bgMusic) return;
     bgMusic.volume = 0.35;
-
     try {
       await bgMusic.play();
     } catch (e) {
-      // Don’t silence forever—log so you can see if it’s blocked / 404
       console.log("Music play blocked or failed:", e);
     }
   }
 
-  function openCurtain(){
-    if (opened) return;
-    opened = true;
-
-    // ✅ Start music on the SAME click/tap gesture
-    startMusic();
-
+  function revealPage() {
     curtain.classList.add("open");
+    document.body.classList.remove("pre-reveal");
+    document.body.classList.add("revealed");
 
     setTimeout(() => {
-      document.body.classList.remove("pre-reveal");
-      document.body.classList.add("revealed");
-    }, 120);
-
-    setTimeout(() => curtain.remove(), 520);
+      curtain.remove();
+    }, 900);
   }
 
-  // IMPORTANT: open ONLY when clicking the prompt (so you don’t accidentally open instantly)
-  if (prompt){
+  function openCurtain() {
+  if (opened) return;
+  opened = true;
+
+  startMusic();
+
+  if (!vid) {
+    revealPage();
+    return;
+  }
+
+  vid.loop = false;
+  vid.currentTime = 0;
+
+  // optional: hide the button as soon as clicked
+  if (prompt) {
+    prompt.style.opacity = "0";
+    prompt.style.pointerEvents = "none";
+  }
+
+  vid.onended = () => {
+    revealPage();   // reveal ONLY after the full video finishes
+  };
+
+  vid.onerror = () => {
+    console.log("Curtain video failed to load.");
+    revealPage();
+  };
+
+  vid.play().catch((e) => {
+    console.log("Curtain video play blocked or failed:", e);
+    revealPage();
+  });
+}
+
+  if (prompt) {
     prompt.addEventListener("click", openCurtain);
     prompt.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
@@ -239,7 +257,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   } else {
-    // fallback
     curtain.addEventListener("click", openCurtain);
   }
 });
@@ -256,7 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const completed = new Set();
 
   // how much must be scratched off per circle to count as "done"
-  const COMPLETE_THRESHOLD = 0.10; // 55% scratched
+  const COMPLETE_THRESHOLD = 0.15; // 55% scratched
 
   function makeGoldTexture(ctx, w, h){
     const g1 = ctx.createRadialGradient(w*0.35, h*0.35, 10, w*0.5, h*0.5, w*0.7);
@@ -451,6 +468,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const intro = document.getElementById("introEnvelope");
   const btn = document.getElementById("openEnvelopeBtn");
@@ -473,25 +492,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   btn.addEventListener("click", async () => {
-    if (opened) return;
-    opened = true;
+  if (opened) return;
+  opened = true;
 
-    await startMusic();
+  await startMusic();
 
-    intro.classList.add("is-opening");
+  intro.classList.add("is-opening");
+
+  setTimeout(() => {
     document.body.classList.remove("pre-reveal");
     document.body.classList.add("revealed");
+  }, 250);
 
-    setTimeout(() => {
-      intro.classList.add("is-done");
-    }, 1400);
+  setTimeout(() => {
+    intro.classList.add("is-done");
+  }, 1600);
 
-    setTimeout(() => {
-      intro.remove();
-    }, 2200);
-  });
+  setTimeout(() => {
+    intro.remove();
+  }, 2400);
 });
-
-
-
-
+});

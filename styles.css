@@ -1361,16 +1361,16 @@ body.scene-final .rsvpTop{
 }
 
 .hero__bismillah{
-  margin: 0 0 6px;
-  font-size: clamp(28px, 4vw, 48px);
-  line-height: 1.4;
+  margin: 14px 0 10px;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.35;
   color: #fff;
   text-align: center;
   direction: rtl;
   unicode-bidi: isolate;
   letter-spacing: 0;
   font-weight: 400;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.30);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.22);
   font-family: "Noto Naskh Arabic", "Amiri", "Scheherazade New", serif;
 }
 

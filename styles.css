@@ -597,7 +597,7 @@ body.revealed main { opacity: 1; }
 }
 
 .hero__topline{
-  margin: 0;
+  margin: 40px 0 18px;
   font-size: 15px;
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -1340,6 +1340,60 @@ body.scene-final .rsvpTop{
 
 #travel .links{
   margin-top: 10px;
+}
+
+.hero__inner{
+  width: min(900px, 92vw);
+  text-align: center;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 180px 0 70px; /* increased from 140px to move everything a little lower */
+}
+
+.hero__topline{
+  margin: 0 0 18px;
+  font-size: 15px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.hero__bismillah{
+  margin: 0 0 6px;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1.4;
+  color: #fff;
+  text-align: center;
+  direction: rtl;
+  unicode-bidi: isolate;
+  letter-spacing: 0;
+  font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.30);
+  font-family: "Noto Naskh Arabic", "Amiri", "Scheherazade New", serif;
+}
+
+.hero__bismillahTranslation{
+  display: block;
+  margin: 0 0 28px;
+  font-style: italic;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.30);
+}
+
+.hero__names{
+  margin: 0;
+  font-family: var(--font);
+  font-weight: 400;
+  letter-spacing: 3px;
+  line-height: 1.05;
+  font-size: clamp(46px, 6vw, 84px);
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 80px;
 }
 
 

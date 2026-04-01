@@ -1421,6 +1421,12 @@ body.scene-final .rsvpTop{
   }
 }
 
+@media (max-width: 760px){
+  #home .hero__bottomline{
+    max-width: 34ch;
+    margin: 0 auto;
+  }
+}
 
 
 

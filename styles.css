@@ -1349,7 +1349,7 @@ body.scene-final .rsvpTop{
   grid-template-rows: auto auto auto 1fr auto;
   align-items: center;
   gap: 12px;
-  padding: 180px 0 70px; /* increased from 140px to move everything a little lower */
+  padding: 150px 0 70px; /* increased from 140px to move everything a little lower */
 }
 
 .hero__topline{

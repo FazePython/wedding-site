@@ -614,7 +614,7 @@ body.revealed main { opacity: 1; }
   font-size: clamp(46px, 6vw, 84px); /* same as .names */
   text-transform: uppercase;         /* same as .names */
   color: #fff;
-  margin-bottom: 80px; /* try 60px–140px */
+  margin-bottom: 40px; /* try 60px–140px */
 }
 
 

@@ -1396,6 +1396,10 @@ body.scene-final .rsvpTop{
   margin-bottom: 50px;
 }
 
-
+@media (max-width: 760px){
+  #home .hero__inner{
+    padding: 70px 0 40px;
+  }
+}
 
 

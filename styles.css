@@ -593,7 +593,7 @@ body.revealed main { opacity: 1; }
   grid-template-rows: auto auto 1fr auto;
   align-items: center;
   gap: 18px;
-  padding: 120px 0 70px;
+  padding: 180px 0 70px;
 }
 
 .hero__topline{

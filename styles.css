@@ -1396,37 +1396,6 @@ body.scene-final .rsvpTop{
   margin-bottom: 80px;
 }
 
-@media (max-width: 760px){
-  #home .hero__inner{
-    padding: 120px 0 40px;   /* was much lower */
-    gap: 8px;
-    justify-content: center;
-  }
-
-  #home .hero__names{
-    margin-bottom: 32px;     /* was 80px */
-  }
-
-  #home .hero__topline{
-    margin: 0 0 10px;
-  }
-
-  #home .hero__bismillahTranslation{
-    margin: 0 0 16px;
-  }
-
-  #home .hero__bottomline{
-    max-width: 22ch;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 760px){
-  #home .hero__bottomline{
-    max-width: 34ch;
-    margin: 0 auto;
-  }
-}
 
 
 

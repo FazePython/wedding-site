@@ -633,6 +633,7 @@ body.revealed main { opacity: 1; }
   align-self: end;
   max-width: 95ch;
   justify-self: center;
+  margin-bottom: 24px
 }
 
 .hero__scroll{

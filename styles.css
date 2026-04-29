@@ -1419,7 +1419,7 @@ body.scene-final .rsvpTop{
 /* HOME PAGE MOBILE ONLY */
 @media only screen and (max-width: 760px){
   #home .hero__topline{
-    font-size: 10px;
+    font-size: 12px;
     margin-bottom: 30px;
   }
 
@@ -1438,7 +1438,7 @@ body.scene-final .rsvpTop{
   }
 
   #home .hero__bottomline{
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.5;
   }
 }

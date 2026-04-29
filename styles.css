@@ -1419,7 +1419,7 @@ body.scene-final .rsvpTop{
 /* HOME PAGE MOBILE ONLY */
 @media only screen and (max-width: 760px){
   #home .hero__topline{
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 30px;
   }
 
@@ -1429,7 +1429,7 @@ body.scene-final .rsvpTop{
   }
 
   #home .hero__bismillahTranslation{
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 18px;
   
   }
@@ -1440,7 +1440,7 @@ body.scene-final .rsvpTop{
   }
 
   #home .hero__bottomline{
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.5;
   }
 }

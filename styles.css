@@ -1355,7 +1355,7 @@ body.scene-final .rsvpTop{
 
 .hero__topline{
   margin: 0 0 50px;
-  font-size: 15px;
+  font-size: 12px;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #fff;
@@ -1379,7 +1379,7 @@ body.scene-final .rsvpTop{
   display: block;
   margin: 0 0 28px;
   font-style: italic;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: 1px;
   color: #fff;
   text-shadow: 0 2px 10px rgba(0,0,0,0.30);
@@ -1404,7 +1404,7 @@ body.scene-final .rsvpTop{
   }
 
   .hero__bottomline{
-    font-size: 13px;
+    font-size: 11px;
     line-height: 1.6;
     padding: 0 14px;
     margin-bottom: 30px;

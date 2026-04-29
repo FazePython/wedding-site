@@ -1425,11 +1425,13 @@ body.scene-final .rsvpTop{
 
   #home .hero__bismillah{
     font-size: clamp(28px, 9vw, 42px);
+    transform: translateY(-30px);
   }
 
   #home .hero__bismillahTranslation{
     font-size: 12px;
     margin-bottom: 18px;
+  
   }
 
   #home .hero__names{

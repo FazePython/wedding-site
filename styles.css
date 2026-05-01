@@ -599,6 +599,7 @@ body.revealed main { opacity: 1; }
 .hero__topline{
   margin: 40px 0 18px;
   font-size: 15px;
+  font-weight: 300;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: #fff;
@@ -608,7 +609,7 @@ body.revealed main { opacity: 1; }
 .hero__names{
   margin: 0;
   font-family: var(--font);          /* same as your site */
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 3px;               /* same as .names */
   line-height: 1.05;                 /* same as .names */
   font-size: clamp(46px, 6vw, 84px); /* same as .names */
@@ -634,6 +635,7 @@ body.revealed main { opacity: 1; }
   max-width: 95ch;
   justify-self: center;
   margin-bottom: 24px
+  font-weight: 300;
 }
 
 .hero__scroll{
@@ -1388,7 +1390,7 @@ body.scene-final .rsvpTop{
 .hero__names{
   margin: 0;
   font-family: var(--font);
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 3px;
   line-height: 1.05;
   font-size: clamp(46px, 6vw, 84px);
@@ -1404,7 +1406,7 @@ body.scene-final .rsvpTop{
   }
 
   .hero__bottomline{
-    font-size: 13px;
+    font-size: 15px;
     line-height: 1.6;
     padding: 0 14px;
     margin-bottom: 30px;

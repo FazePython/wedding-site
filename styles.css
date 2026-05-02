@@ -35,7 +35,7 @@ body{
   background: var(--bg);
 }
 
-/* If you keep photo frames, this makes them feel “paper + airy” */
+/* If you keep photo frames, this makes them feel "paper + airy" */
 .bgImg{
   position: absolute;
   inset: 0;
@@ -259,9 +259,7 @@ h2{
 
 /* =========================
    Countdown
-   
    ========================= */
-
 
 #countdown[hidden] { display: none !important; }
 
@@ -471,7 +469,7 @@ body.scene-events .f1{ transform: translate(-18px, 8px) scale(1.02); opacity: 0.
 body.scene-events .f2{ transform: translate(20px, -18px) scale(1.06); opacity: 0.45; }
 body.scene-events .f3{ transform: translate(35px, 10px) scale(1.03); opacity: 0.28; }
 
-/* DRESS: add “bloom” feel */
+/* DRESS: add "bloom" feel */
 body.scene-dress .f1{ transform: translate(-35px, 18px) scale(1.06); opacity: 1; }
 body.scene-dress .f2{ transform: translate(45px, -26px) scale(1.10); opacity: 0.52; }
 body.scene-dress .f3{ transform: translate(60px, 22px) scale(1.06); opacity: 0.32; }
@@ -481,7 +479,7 @@ body.scene-travel .f1{ transform: translate(-12px, -8px) scale(1.02); opacity: 0
 body.scene-travel .f2{ transform: translate(70px, -34px) scale(1.12); opacity: 0.40; }
 body.scene-travel .f3{ transform: translate(10px, 40px) scale(1.03); opacity: 0.24; }
 
-/* RSVP: “finale” — strongest bloom */
+/* RSVP: "finale" — strongest bloom */
 body.scene-rsvp .f1{ transform: translate(-55px, 25px) scale(1.08); opacity: 1; }
 body.scene-rsvp .f2{ transform: translate(90px, -50px) scale(1.18); opacity: 0.60; }
 body.scene-rsvp .f3{ transform: translate(80px, 55px) scale(1.10); opacity: 0.38; }
@@ -634,22 +632,8 @@ body.revealed main { opacity: 1; }
   align-self: end;
   max-width: 95ch;
   justify-self: center;
-  margin-bottom: 24px
+  margin-bottom: 24px;
   font-weight: 300;
-}
-
-.hero__scroll{
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  transform: translateX(-50%);
-  font-size: 15px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #fff;
-  display: grid;
-  gap: 6px;
-  justify-items: center;
 }
 
 .hero__arrow{
@@ -657,7 +641,7 @@ body.revealed main { opacity: 1; }
 }
 
 /* =========================
-   REVEAL (Scratch) Sectiong
+   REVEAL (Scratch) Section
    ========================= */
 
 .panel.reveal{
@@ -1092,12 +1076,6 @@ body.scene-final .rsvpTop{
 /* =========================
    Envelope intro overlay
    ========================= */
-/* =========================
-   Envelope intro overlay
-   ========================= */
-/* =========================
-   Envelope intro overlay
-   ========================= */
 .introEnvelope{
   position: fixed;
   inset: 0;
@@ -1218,15 +1196,6 @@ body.scene-final .rsvpTop{
   pointer-events: none;
 }
 
-/* left + right folds cover the lower letter sides */
-/* front pocket */
-.envelope__front{
-  position: absolute;
-  inset: 0;
-  z-index: 5;
-  pointer-events: none;
-}
-
 /* side folds */
 .envelope__front::before,
 .envelope__front::after{
@@ -1331,8 +1300,7 @@ body.scene-final .rsvpTop{
 
 .hero__topline,
 .hero__names,
-.hero__bottomline,
-.hero__scroll{
+.hero__bottomline{
   text-shadow: 0 2px 10px rgba(0,0,0,0.30);
 }
 
@@ -1352,7 +1320,7 @@ body.scene-final .rsvpTop{
   grid-template-rows: auto auto auto 1fr auto;
   align-items: center;
   gap: 12px;
-  padding: 150px 0 70px; /* increased from 140px to move everything a little lower */
+  padding: 150px 0 70px;
 }
 
 .hero__topline{
@@ -1411,14 +1379,8 @@ body.scene-final .rsvpTop{
     padding: 0 14px;
     margin-bottom: 30px;
   }
-
-  .hero__scroll{
-    bottom: 18px;
-    font-size: 10px;
-  }
 }
 
-/* HOME PAGE MOBILE ONLY */
 /* HOME PAGE MOBILE ONLY */
 @media only screen and (max-width: 760px){
   #home .hero__topline{
@@ -1456,8 +1418,7 @@ body.scene-final .rsvpTop{
   #home .hero__bismillah,
   #home .hero__bismillahTranslation,
   #home .hero__names,
-  #home .hero__bottomline,
-  #home .hero__scroll{
+  #home .hero__bottomline{
     font-weight: 500 !important;
     color: #ffffff !important;
     text-shadow:
@@ -1466,26 +1427,18 @@ body.scene-final .rsvpTop{
   }
 }
 
-@media only screen and (max-width: 760px){
-  .panel > .hero__scroll,
-  #home .hero__scroll{
-    bottom: 18px;
-    font-size: 10px;
-  }
+/* =========================
+   SCROLL INDICATOR
+   — rose on light pages, white on video pages
+   ========================= */
 
-  .hero__arrow{
-    font-size: 14px;
-  }
-}
-
-/* Make each page control its own scroll label */
+/* Make each panel position-relative so absolute scroll sits correctly */
 .panel{
   position: relative;
 }
 
-/* Scroll label for every page */
-.panel > .hero__scroll,
-#home .hero__scroll{
+/* Base: visible rose for all light-background pages (reveal, events, dress, travel, gifts, rsvp) */
+.panel > .hero__scroll{
   position: absolute;
   left: 50%;
   bottom: 18px;
@@ -1499,11 +1452,41 @@ body.scene-final .rsvpTop{
   font-size: 15px;
   letter-spacing: 3px;
   text-transform: uppercase;
+  pointer-events: none;
+
+  /* Rose color — readable on the cream background */
+  color: var(--rose);
+  text-shadow: none;
+}
+
+/* Override: white on the home video page */
+#home > .hero__scroll{
   color: #fff;
   text-shadow: 0 2px 10px rgba(0,0,0,0.85);
-  pointer-events: none;
+  font-weight: 500;
 }
 
 .hero__arrow{
   font-size: 18px;
+}
+
+/* Mobile tweaks for scroll label */
+@media only screen and (max-width: 760px){
+  .panel > .hero__scroll{
+    bottom: 18px;
+    font-size: 10px;
+  }
+
+  .hero__arrow{
+    font-size: 14px;
+  }
+
+  /* Keep home scroll white + bold on mobile */
+  #home > .hero__scroll{
+    font-weight: 500 !important;
+    color: #ffffff !important;
+    text-shadow:
+      0 2px 10px rgba(0,0,0,0.85),
+      0 0 26px rgba(0,0,0,0.65) !important;
+  }
 }

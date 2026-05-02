@@ -11,160 +11,145 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./styles.css" />
 </head>
-  
+
 <body>
 
   <div id="introEnvelope" class="introEnvelope">
-  <div class="introEnvelope__center">
-    <div class="envelope" aria-hidden="true">
-      <div class="envelope__back"></div>
+    <div class="introEnvelope__center">
+      <div class="envelope" aria-hidden="true">
+        <div class="envelope__back"></div>
 
-      <div class="envelope__letter">
-        <div class="envelope__letterInner">
-          <p class="envelope__eyebrow">You are invited</p>
-          <h2 class="envelope__title">Zahin &amp; Faizan</h2>
-          <p class="envelope__date">October 4, 2026 · Dallas, Texas</p>
+        <div class="envelope__letter">
+          <div class="envelope__letterInner">
+            <p class="envelope__eyebrow">You are invited</p>
+            <h2 class="envelope__title">Zahin &amp; Faizan</h2>
+            <p class="envelope__date">October 4, 2026 · Dallas, Texas</p>
+          </div>
         </div>
+
+        <div class="envelope__front"></div>
+        <div class="envelope__topCover"></div>
+        <div class="envelope__flap"></div>
+
+        <button class="envelope__seal" id="openEnvelopeBtn" type="button">
+          Open
+        </button>
       </div>
-
-      <div class="envelope__front"></div>
-      <div class="envelope__topCover"></div>
-      <div class="envelope__flap"></div>
-
-      <button class="envelope__seal" id="openEnvelopeBtn" type="button">
-        Open
-      </button>
     </div>
   </div>
-</div>
-
 
   <!-- Music -->
   <audio id="bgMusic" loop preload="auto">
     <source src="./frames/song.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- the rest of your page -->
-  
-
   <aside class="dots" aria-label="Sections">
-  <a class="dot active" href="#home" aria-label="Home"></a>
-  <a class="dot" href="#reveal" aria-label="Reveal"></a>
-  <a class="dot" href="#events" aria-label="Events"></a>
-  <a class="dot" href="#dress" aria-label="Dress code"></a>
-  <a class="dot" href="#travel" aria-label="Travel"></a>
-  <a class="dot" href="#gifts" aria-label="Gifts"></a>
-  <a class="dot" href="#rsvp" aria-label="RSVP"></a>
-  <a class="dot" href="#final" aria-label="Final"></a>
-</aside>
+    <a class="dot active" href="#home" aria-label="Home"></a>
+    <a class="dot" href="#reveal" aria-label="Reveal"></a>
+    <a class="dot" href="#events" aria-label="Events"></a>
+    <a class="dot" href="#dress" aria-label="Dress code"></a>
+    <a class="dot" href="#travel" aria-label="Travel"></a>
+    <a class="dot" href="#gifts" aria-label="Gifts"></a>
+    <a class="dot" href="#rsvp" aria-label="RSVP"></a>
+    <a class="dot" href="#final" aria-label="Final"></a>
+  </aside>
 
   <main class="snap">
 
-
     <!-- HOME -->
     <section class="panel hero" id="home">
-  <div class="homeVideo" aria-hidden="true">
-    <video class="homeVideo__vid" autoplay muted loop playsinline preload="auto">
-      <source src="./frames/cherry1.mp4" type="video/mp4" />
-    </video>
-  </div>
+      <div class="homeVideo" aria-hidden="true">
+        <video class="homeVideo__vid" autoplay muted loop playsinline preload="auto">
+          <source src="./frames/cherry1.mp4" type="video/mp4" />
+        </video>
+      </div>
 
-  <div class="hero__inner">
+      <div class="hero__inner">
 
-    <div class="hero__bismillah" aria-label="Bismillah al-Rahman al-Rahim">
-      بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-    </div>
+        <div class="hero__bismillah" aria-label="Bismillah al-Rahman al-Rahim">
+          بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+        </div>
 
-    <span class="hero__bismillahTranslation">
-      “In the name of Allah, the Most Compassionate, the Most Merciful.”
-    </span>
+        <span class="hero__bismillahTranslation">
+          “In the name of Allah, the Most Compassionate, the Most Merciful.”
+        </span>
 
-     <p class="hero__topline">YOU ARE CORDIALLY INVITED TO CELEBRATE THE WEDDING OF</p>
+        <p class="hero__topline">
+          YOU ARE CORDIALLY INVITED TO CELEBRATE THE WEDDING OF
+        </p>
 
-    <h1 class="hero__names">
-      Zahin <span class="hero__amp">&</span><br>
-      Faizan
-    </h1>
+        <h1 class="hero__names">
+          Zahin <span class="hero__amp">&amp;</span><br>
+          Faizan
+        </h1>
 
-    <p class="hero__bottomline">
-      Graciously Hosted by
-      Nazmun Nahar &amp; Humayun Kabir, alongisde Aisha Qureshi &amp; Humayun Qureshi. Please RSVP by August 4th.
-    </p>
+        <p class="hero__bottomline">
+          Graciously Hosted by
+          Nazmun Nahar &amp; Humayun Kabir, alongisde Aisha Qureshi &amp; Humayun Qureshi. Please RSVP by August 4th.
+        </p>
+
+        <div class="hero__scroll" aria-hidden="true">
+          <span>SCROLL</span>
+          <span class="hero__arrow">↓</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- REVEAL -->
+    <section class="panel reveal" id="reveal">
+      <div class="reveal__inner">
+        <p class="reveal__hint">Scratch all three circles to continue</p>
+
+        <h1 class="reveal__title">Reveal</h1>
+
+        <div class="reveal__circles" aria-label="Scratch to reveal date">
+          <div class="scratch" data-i="0" aria-label="Scratch circle 1">
+            <canvas class="scratch__canvas" width="160" height="160"></canvas>
+            <div class="scratch__under">OCT</div>
+          </div>
+
+          <div class="scratch" data-i="1" aria-label="Scratch circle 2">
+            <canvas class="scratch__canvas" width="160" height="160"></canvas>
+            <div class="scratch__under">4TH</div>
+          </div>
+
+          <div class="scratch" data-i="2" aria-label="Scratch circle 3">
+            <canvas class="scratch__canvas" width="160" height="160"></canvas>
+            <div class="scratch__under">2026</div>
+          </div>
+        </div>
+
+        <p class="reveal__married" id="marriedMsg" hidden>
+          We are getting married!
+        </p>
+
+        <div class="count" id="countdown" hidden>
+          <span><b id="d">0</b> DAYS</span>
+          <span class="sep">·</span>
+          <span><b id="h">00</b> HRS</span>
+          <span class="sep">·</span>
+          <span><b id="m">00</b> MIN</span>
+          <span class="sep">·</span>
+          <span><b id="s">00</b> SEC</span>
+        </div>
+      </div>
 
       <div class="hero__scroll" aria-hidden="true">
-    <span>SCROLL</span>
-    <span class="hero__arrow">↓</span>
-  </div>
-</section>
-
-<section class="panel reveal" id="reveal">
-
-
-
-  <div class="reveal__inner">
-    <p class="reveal__hint">Scratch all three circles to continue</p>
-
-    <h1 class="reveal__title">Reveal</h1>
-    
-
-    <div class="reveal__circles" aria-label="Scratch to reveal date">
-      <div class="scratch" data-i="0" aria-label="Scratch circle 1">
-        <canvas class="scratch__canvas" width="160" height="160"></canvas>
-        <div class="scratch__under">OCT</div>
+        <span>SCROLL</span>
+        <span class="hero__arrow">↓</span>
       </div>
-
-      <div class="scratch" data-i="1" aria-label="Scratch circle 2">
-        <canvas class="scratch__canvas" width="160" height="160"></canvas>
-        <div class="scratch__under">4TH</div>
-      </div>
-
-      <div class="scratch" data-i="2" aria-label="Scratch circle 3">
-        <canvas class="scratch__canvas" width="160" height="160"></canvas>
-        <div class="scratch__under">2026</div>
-      </div>
-    </div>
-
-   
-
-    <p class="reveal__married" id="marriedMsg" hidden>
-     We are getting married!
-    </p>
-
-
-    <div class="count" id="countdown" hidden>
-  <span><b id="d">0</b> DAYS</span>
-  <span class="sep">·</span>
-  <span><b id="h">00</b> HRS</span>
-  <span class="sep">·</span>
-  <span><b id="m">00</b> MIN</span>
-  <span class="sep">·</span>
-  <span><b id="s">00</b> SEC</span>
-</div>
-
-  </div>
-
-
-       <div class="hero__scroll" aria-hidden="true">
-    <span>SCROLL</span>
-    <span class="hero__arrow">↓</span>
-  </div>
-</section>
-
+    </section>
 
     <!-- EVENTS -->
     <section class="panel" id="events">
       <div class="inner">
         <h2>Event Details</h2>
-<!--
-        <p class="line">
-          <!--<span class="label">Gaye Holud</span> 
-          <span class="value">Sat, Oct 3, 2026 · 6:00–11:00 PM</span>
-        </p> -->
 
         <p class="line">
           <span class="label">Time</span>
@@ -187,205 +172,178 @@
           </a>
         </div>
       </div>
-    
-        <div class="hero__scroll" aria-hidden="true">
-    <span>SCROLL</span>
-    <span class="hero__arrow">↓</span>
-  </div>
-</section>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <span>SCROLL</span>
+        <span class="hero__arrow">↓</span>
+      </div>
+    </section>
 
     <!-- DRESS CODE -->
-     <section class="panel" id="dress">
-  <div class="inner">
-    <h2>Dress Code</h2>
+    <section class="panel" id="dress">
+      <div class="inner">
+        <h2>Dress Code</h2>
 
-    <!--<p class="miniTitle">Gaye Holud</p>
-    <p class="copy">
-      A joyful Bangladeshi pre-wedding celeberation where turmeric is shared in an evening filled with laughter, music, love, and tegotherness, marking the start of our wedding festivities.
-      <br><br>
+        <p class="miniTitle"> </p>
 
-      <b>Women:</b> Cheerful colors such as <b>yellow, mustard, marigold, orange, or coral.</b>
-      <br><br>
-
-      <b>Men:</b> Bright colors like <b>pink, orange, yellow, or peach.</b>
-    </p>
-
-    <div class="rule"></div> -->
-
-    <p class="miniTitle"> </p>
-    <p class="copy">
-
-
-      <b>Women:</b> Soft pastel shades such as <b>blush pink, dusty rose, champagne, soft peach, light lavender, powder blue, sage green, or ivory.</b>
-      <br><br>
-
-      <b>Men:</b> Sherwanis in light, elegant colors such as <b>ivory, cream, beige, soft pastels, or light jewel tones.</b>
-      <br><br>
-
-      As the Nikkah will also be taking place, we kindly ask that outfits are modest and wedding-appropriate, while still embracing elegance and celebration.
-    </p>
-  </div>
-</section>
-
-       <!-- <p class="miniTitle">Valima</p>
         <p class="copy">
-          Traditional and elegant attire.<br/>
-          Women: cool elegant colors (soft blue, mint green, lavender, silver, teal, light gray).<br/>
-          Men: formal suits (navy, charcoal, black).
+          <b>Women:</b> Soft pastel shades such as <b>blush pink, dusty rose, champagne, soft peach, light lavender, powder blue, sage green, or ivory.</b>
+          <br><br>
+
+          <b>Men:</b> Sherwanis in light, elegant colors such as <b>ivory, cream, beige, soft pastels, or light jewel tones.</b>
+          <br><br>
+
+          As the Nikkah will also be taking place, we kindly ask that outfits are modest and wedding-appropriate, while still embracing elegance and celebration.
         </p>
-
-        <p class="note subtle">
-          Theme note: feel free to incorporate lavender / plum tones if you’d like.
-        </p>-->
       </div>
-   
 
-       <div class="hero__scroll" aria-hidden="true">
-    <span>SCROLL</span>
-    <span class="hero__arrow">↓</span>
-  </div>
-</section>
+      <div class="hero__scroll" aria-hidden="true">
+        <span>SCROLL</span>
+        <span class="hero__arrow">↓</span>
+      </div>
+    </section>
 
     <!-- TRAVEL -->
     <section class="panel" id="travel">
-  <div class="inner">
-    <h2>Travel</h2>
-    <p class="copy">
-      All guests are responsible for their own accommodations.
-    </p>
+      <div class="inner">
+        <h2>Travel</h2>
 
-    <div class="travelItem">
-      <p class="line">
-        <span class="label">Quality Inn &amp; Suites</span>
-        <span class="value">10835 Composite Dr. Dallas, TX 75220</span>
-      </p>
+        <p class="copy">
+          All guests are responsible for their own accommodations.
+        </p>
 
-      <p class="travelNote">
-      If you’d like to stay at the hotel <b>closest</b> to the venue, this would be the best option. It’s located directly across from the venue and is within walking distance.
-      </p>
+        <div class="travelItem">
+          <p class="line">
+            <span class="label">Quality Inn &amp; Suites</span>
+            <span class="value">10835 Composite Dr. Dallas, TX 75220</span>
+          </p>
 
-      <div class="links">
-        <a class="btn" target="_blank" rel="noreferrer"
-           href="https://www.google.com/search?q=quality+inn+10835+composite+drive&rlz=1C1VDKB_enUS1004US1004&oq=qualkity+inn+10835+&gs_lcrp=EgZjaHJvbWUqCggBEAAYChgWGB4yBggAEEUYOTIKCAEQABgKGBYYHjINCAIQABiGAxiABBiKBTINCAMQABiGAxiABBiKBTINCAQQABiGAxiABBiKBTINCAUQABiGAxiABBiKBTIHCAYQABjvBTIHCAcQABjvBTIHCAgQABjvBTIHCAkQABjvBdIBCDc2ODJqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8">
-          Website
-        </a>
+          <p class="travelNote">
+            If you’d like to stay at the hotel <b>closest</b> to the venue, this would be the best option. It’s located directly across from the venue and is within walking distance.
+          </p>
+
+          <div class="links">
+            <a class="btn" target="_blank" rel="noreferrer"
+               href="https://www.google.com/search?q=quality+inn+10835+composite+drive&rlz=1C1VDKB_enUS1004US1004&oq=qualkity+inn+10835+&gs_lcrp=EgZjaHJvbWUqCggBEAAYChgWGB4yBggAEEUYOTIKCAEQABgKGBYYHjINCAIQABiGAxiABBiKBTINCAMQABiGAxiABBiKBTINCAQQABiGAxiABBiKBTINCAUQABiGAxiABBiKBTIHCAYQABjvBTIHCAcQABjvBTIHCAgQABjvBTIHCAkQABjvBdIBCDc2ODJqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8">
+              Website
+            </a>
+          </div>
+        </div>
+
+        <div class="travelItem">
+          <p class="line">
+            <span class="label">Hyatt Place Dallas/Garland/Richardson</span>
+            <span class="value">5101 N President George Bush Hwy, Garland, TX 75040</span>
+          </p>
+
+          <div class="links">
+            <a class="btn" target="_blank" rel="noreferrer"
+               href="https://www.hyatt.com/hyatt-place/en-US/dfwzb-hyatt-place-dallas-garland-richardson?src=corp_lclb_google_seo_dfwzb&utm_source=google&utm_medium=organic&utm_campaign=lmr">
+              Website
+            </a>
+          </div>
+        </div>
+
+        <div class="travelItem">
+          <p class="line">
+            <span class="label">Tru by Hilton Garland Richardson</span>
+            <span class="value">5055 N President George Bush Hwy, Garland, TX 75040</span>
+          </p>
+
+          <div class="links">
+            <a class="btn" target="_blank" rel="noreferrer"
+               href="https://www.hilton.com/en/hotels/dalglru-tru-garland-richardson/?SEO_id=GMB-AMER-RU-DALGLRU&y_source=1_ODMyMDEzNS03MTUtbG9jYXRpb24ud2Vic2l0ZQ==&wwpath=www.theknot.com/us/zahin-zaima-and-faizan-qureshi-oct-2026&WT.mc_id=zLADA0WW1XX2OLA3DA4Aff5Aff6MULTIBR7_138624670_2116208&ranMID=41650&ranEAID=2116208&ranSiteID=TnL5HPStwNw-HpWZwNZEKC4ozzAdacIVzA&gad_source=7&dclid=CO7z86qpm5MDFRhpCQkdsbkd2w">
+              Website
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="travelItem">
-      <p class="line">
-        <span class="label">Hyatt Place Dallas/Garland/Richardson</span>
-        <span class="value">5101 N President George Bush Hwy, Garland, TX 75040</span>
-      </p>
-
-      <div class="links">
-        <a class="btn" target="_blank" rel="noreferrer"
-           href="https://www.hyatt.com/hyatt-place/en-US/dfwzb-hyatt-place-dallas-garland-richardson?src=corp_lclb_google_seo_dfwzb&utm_source=google&utm_medium=organic&utm_campaign=lmr">
-          Website
-        </a>
-      </div>
-    </div>
-
-    <div class="travelItem">
-      <p class="line">
-        <span class="label">Tru by Hilton Garland Richardson</span>
-        <span class="value">5055 N President George Bush Hwy, Garland, TX 75040</span>
-      </p>
-
-      <div class="links">
-        <a class="btn" target="_blank" rel="noreferrer"
-           href="https://www.hilton.com/en/hotels/dalglru-tru-garland-richardson/?SEO_id=GMB-AMER-RU-DALGLRU&y_source=1_ODMyMDEzNS03MTUtbG9jYXRpb24ud2Vic2l0ZQ==&wwpath=www.theknot.com/us/zahin-zaima-and-faizan-qureshi-oct-2026&WT.mc_id=zLADA0WW1XX2OLA3DA4Aff5Aff6MULTIBR7_138624670_2116208&ranMID=41650&ranEAID=2116208&ranSiteID=TnL5HPStwNw-HpWZwNZEKC4ozzAdacIVzA&gad_source=7&dclid=CO7z86qpm5MDFRhpCQkdsbkd2w">
-          Website
-        </a>
-      </div>
-    </div>
-  </div>
-
-
-       <div class="hero__scroll" aria-hidden="true">
-    <span>SCROLL</span>
-    <span class="hero__arrow">↓</span>
-  </div>
-</section>
-    
-
-    <!-- Replace this with your own image -->
-    
-
-    <section class="panel" id="gifts">
-  <div class="inner gifts">
-    <h2 class="gifts__title">Gifts</h2>
-
-    <p class="copy gifts__copy">
-      We kindly ask for no boxed gifts. If you wish to give, a cash gift would be greatly appreciated.
-    </p>
-  </div>
-</section>
-
-
-<section class="panel" id="rsvp">
-  <div class="inner">
-    <h2>RSVP</h2>
-    <p class="copy">
-      Please RSVP by <b>August 4</b>.
-    </p>
-
-    <div class="links">
-      <a class="btn" target="_blank" rel="noreferrer"
-         href="https://www.theknot.com/us/zahin-zaima-and-faizan-qureshi-oct-2026/rsvp">
-        RSVP
-      </a>
-
-      <button class="btn ghost" id="icsBtn" type="button">
-        ADD TO CALENDAR
-      </button>
-    </div>
-
-    <p class="footer">Z &amp; F · 10.4.2026</p>
-  </div>
-</section>
-      <section class="panel nightHero" id="final">
-  <div class="finalVideo" aria-hidden="true">
-    <video class="finalVideo__vid" autoplay muted loop playsinline preload="auto">
-      <source src="./frames/Untitled.mp4" type="video/mp4" />
-    </video>
-  </div>
-
-  <div class="nightHero__inner">
-
-    <h1 class="nightHero__names">Zahin &amp; Faizan</h1>
-
-    <p class="nightHero__meta">OCTOBER 4TH, 2026 · DALLAS, TEXAS</p>
-
-    <div class="nightHero__arabic" aria-label="In this World and the Hereafter">
-      فِي الدُّنْيَا وَالْآخِرَةِ
-    </div>
-
-    <span class="quoteItalic">“In this World and the Hereafter”</span>
-
-    <div class="nightHero__links">
-      
-
-      
-    </div>
-  </div>
-</section>
-
-        <p class="footer">Z & F · 10.4.2026</p>
+      <div class="hero__scroll" aria-hidden="true">
+        <span>SCROLL</span>
+        <span class="hero__arrow">↓</span>
       </div>
     </section>
+
+    <!-- GIFTS -->
+    <section class="panel" id="gifts">
+      <div class="inner gifts">
+        <h2 class="gifts__title">Gifts</h2>
+
+        <p class="copy gifts__copy">
+          We kindly ask for no boxed gifts. If you wish to give, a cash gift would be greatly appreciated.
+        </p>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <span>SCROLL</span>
+        <span class="hero__arrow">↓</span>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="panel" id="rsvp">
+      <div class="inner">
+        <h2>RSVP</h2>
+
+        <p class="copy">
+          Please RSVP by <b>August 4</b>.
+        </p>
+
+        <div class="links">
+          <a class="btn" target="_blank" rel="noreferrer"
+             href="https://www.theknot.com/us/zahin-zaima-and-faizan-qureshi-oct-2026/rsvp">
+            RSVP
+          </a>
+
+          <button class="btn ghost" id="icsBtn" type="button">
+            ADD TO CALENDAR
+          </button>
+        </div>
+
+        <p class="footer">Z &amp; F · 10.4.2026</p>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <span>SCROLL</span>
+        <span class="hero__arrow">↓</span>
+      </div>
+    </section>
+
+    <!-- FINAL -->
+    <section class="panel nightHero" id="final">
+      <div class="finalVideo" aria-hidden="true">
+        <video class="finalVideo__vid" autoplay muted loop playsinline preload="auto">
+          <source src="./frames/Untitled.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div class="nightHero__inner">
+        <h1 class="nightHero__names">Zahin &amp; Faizan</h1>
+
+        <p class="nightHero__meta">OCTOBER 4TH, 2026 · DALLAS, TEXAS</p>
+
+        <div class="nightHero__arabic" aria-label="In this World and the Hereafter">
+          فِي الدُّنْيَا وَالْآخِرَةِ
+        </div>
+
+        <span class="quoteItalic">“In this World and the Hereafter”</span>
+
+        <div class="nightHero__links">
+        </div>
+
+        <p class="footer">Z &amp; F · 10.4.2026</p>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <span>SCROLL</span>
+        <span class="hero__arrow">↓</span>
+      </div>
+    </section>
+
   </main>
-<script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
   <script src="./script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

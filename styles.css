@@ -1474,7 +1474,7 @@ body.scene-final .rsvpTop{
 @media only screen and (max-width: 760px){
   .panel > .hero__scroll{
     bottom: 18px;
-    font-size: 10px;
+    font-size: 15px;
   }
 
   .hero__arrow{

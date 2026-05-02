@@ -1421,32 +1421,39 @@ body.scene-final .rsvpTop{
 /* HOME PAGE MOBILE ONLY */
 @media only screen and (max-width: 760px){
   #home .hero__topline{
-    font-size: 20px !important;
-    margin-bottom: 30px;
-    font-weight: 500;
+    font-size: 22px !important;
+    margin-bottom: 30px !important;
+    font-weight: 500 !important;
   }
 
   #home .hero__bismillah{
-    font-size: clamp(28px, 9vw, 42px);
+    font-size: clamp(42px, 13vw, 64px) !important;
     transform: translateY(-30px);
   }
 
   #home .hero__bismillahTranslation{
-   font-size: 20px !important;
-    margin-bottom: 18px;
-    font-weight: 500;
-  
+    font-size: 22px !important;
+    margin-bottom: 18px !important;
+    font-weight: 500 !important;
   }
 
   #home .hero__names{
-    font-size: clamp(30px, 10vw, 46px);
-    margin-bottom: 30px;
+    font-size: clamp(48px, 15vw, 76px) !important;
+    margin-bottom: 30px !important;
   }
 
   #home .hero__bottomline{
-    font-size: 20px !important;
-    line-height: 1.5;
-    font-weight: 500;
+    font-size: 22px !important;
+    line-height: 1.5 !important;
+    font-weight: 500 !important;
+  }
+
+  #home .hero__scroll{
+    font-size: 13px !important;
+  }
+
+  #home .hero__arrow{
+    font-size: 18px !important;
   }
 }
 

@@ -1466,4 +1466,44 @@ body.scene-final .rsvpTop{
   }
 }
 
+@media only screen and (max-width: 760px){
+  .panel > .hero__scroll,
+  #home .hero__scroll{
+    bottom: 18px;
+    font-size: 10px;
+  }
 
+  .hero__arrow{
+    font-size: 14px;
+  }
+}
+
+/* Make each page control its own scroll label */
+.panel{
+  position: relative;
+}
+
+/* Scroll label for every page */
+.panel > .hero__scroll,
+#home .hero__scroll{
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 20;
+
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+
+  font-size: 15px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.85);
+  pointer-events: none;
+}
+
+.hero__arrow{
+  font-size: 18px;
+}

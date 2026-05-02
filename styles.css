@@ -1422,8 +1422,7 @@ body.scene-final .rsvpTop{
 @media only screen and (max-width: 760px){
   #home .hero__topline{
     font-size: 22px !important;
-    margin-bottom: 30px !important;
-    font-weight: 500 !important;
+
   }
 
   #home .hero__bismillah{
@@ -1433,8 +1432,7 @@ body.scene-final .rsvpTop{
 
   #home .hero__bismillahTranslation{
     font-size: 22px !important;
-    margin-bottom: 18px !important;
-    font-weight: 500 !important;
+
   }
 
   #home .hero__names{
@@ -1444,12 +1442,11 @@ body.scene-final .rsvpTop{
 
   #home .hero__bottomline{
     font-size: 22px !important;
-    line-height: 1.5 !important;
-    font-weight: 500 !important;
+
   }
 
   #home .hero__scroll{
-    font-size: 13px !important;
+    font-size: 16px !important;
   }
 
   #home .hero__arrow{

@@ -514,15 +514,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 });
 
-// Remove scroll-snap from any panel taller than the viewport
+// For tall panels: keep snap, but grow them to fit their content
 function fixOverflowingPanels() {
   document.querySelectorAll('.panel').forEach(panel => {
-    if (panel.scrollHeight > window.innerHeight * 1.05) {
-      panel.style.scrollSnapAlign = 'none';
-      panel.style.minHeight = 'fit-content';
+    const naturalHeight = panel.scrollHeight;
+    const vh = window.innerHeight;
+
+    if (naturalHeight > vh * 1.05) {
+      // Let the panel grow to its natural height — snap still works,
+      // the container just scrolls further before snapping to the next panel
+      panel.style.minHeight = naturalHeight + 'px';
+      panel.style.scrollSnapAlign = 'start';
     } else {
-      panel.style.scrollSnapAlign = '';
       panel.style.minHeight = '';
+      panel.style.scrollSnapAlign = '';
     }
   });
 }

@@ -1274,18 +1274,21 @@ body.scene-final .rsvpTop{
 }
 
 /* Travel panel: allow natural height on all screens */
+/* Travel panel: keep snap but allow overflow content to show */
 #travel {
-  min-height: fit-content;
+  min-height: 100svh;
   height: auto;
-  scroll-snap-align: none; /* don't snap — let it scroll freely */
-  padding-bottom: 60px;
+  scroll-snap-align: start;
+  align-items: flex-start;
+  padding-top: 130px;
+  padding-bottom: 80px;
 }
 
-/* On mobile, any panel taller than the viewport should also opt out of snap */
 @media (max-width: 760px) {
   #travel {
-    scroll-snap-align: none;
+    align-items: flex-start;
     padding-top: 120px;
+    padding-bottom: 100px;
   }
 }
 

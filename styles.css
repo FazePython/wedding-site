@@ -1274,22 +1274,6 @@ body.scene-final .rsvpTop{
 
 /* Travel panel: allow natural height on all screens */
 /* Travel panel: keep snap but allow overflow content to show */
-#travel {
-  min-height: 100svh;
-  height: auto;
-  scroll-snap-align: start;
-  align-items: flex-start;
-  padding-top: 130px;
-  padding-bottom: 100px;
-}
-
-@media (max-width: 760px) {
-  #travel {
-    align-items: flex-start;
-    padding-top: 120px;
-    padding-bottom: 100px;
-  }
-}
 
 .envelope__seal:hover{
   transform: translate(-50%, -50%) scale(1.03);

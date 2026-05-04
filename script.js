@@ -513,3 +513,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 2400);
 });
 });
+
+// Remove scroll-snap from any panel taller than the viewport
+function fixOverflowingPanels() {
+  document.querySelectorAll('.panel').forEach(panel => {
+    if (panel.scrollHeight > window.innerHeight * 1.05) {
+      panel.style.scrollSnapAlign = 'none';
+      panel.style.minHeight = 'fit-content';
+    } else {
+      panel.style.scrollSnapAlign = '';
+      panel.style.minHeight = '';
+    }
+  });
+}
+
+fixOverflowingPanels();
+window.addEventListener('resize', fixOverflowingPanels);

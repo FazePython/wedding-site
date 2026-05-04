@@ -65,8 +65,9 @@ body{
 .snap{
   height: 100svh;
   overflow-y: auto;
-  scroll-snap-type: y proximity; /* was: mandatory */
+  scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
+
   position: relative;
   z-index: 2;
 }
@@ -1271,9 +1272,6 @@ body.scene-final .rsvpTop{
   box-shadow: 0 10px 18px rgba(110,70,60,0.18);
   transition: transform 180ms ease, opacity 250ms ease, box-shadow 180ms ease;
 }
-
-/* Travel panel: allow natural height on all screens */
-/* Travel panel: keep snap but allow overflow content to show */
 
 .envelope__seal:hover{
   transform: translate(-50%, -50%) scale(1.03);

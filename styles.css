@@ -1273,6 +1273,22 @@ body.scene-final .rsvpTop{
   transition: transform 180ms ease, opacity 250ms ease, box-shadow 180ms ease;
 }
 
+/* Travel panel: allow natural height on all screens */
+#travel {
+  min-height: fit-content;
+  height: auto;
+  scroll-snap-align: none; /* don't snap — let it scroll freely */
+  padding-bottom: 60px;
+}
+
+/* On mobile, any panel taller than the viewport should also opt out of snap */
+@media (max-width: 760px) {
+  #travel {
+    scroll-snap-align: none;
+    padding-top: 120px;
+  }
+}
+
 .envelope__seal:hover{
   transform: translate(-50%, -50%) scale(1.03);
   box-shadow: 0 12px 22px rgba(110,70,60,0.22);

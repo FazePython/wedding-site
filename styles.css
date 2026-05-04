@@ -65,9 +65,8 @@ body{
 .snap{
   height: 100svh;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity; /* was: mandatory */
   scroll-behavior: smooth;
-
   position: relative;
   z-index: 2;
 }
@@ -1281,7 +1280,7 @@ body.scene-final .rsvpTop{
   scroll-snap-align: start;
   align-items: flex-start;
   padding-top: 130px;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
 }
 
 @media (max-width: 760px) {

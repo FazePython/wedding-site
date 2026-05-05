@@ -263,37 +263,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ===== Scratch Reveal Logic (WORKING + no repaint bugs) =====
 (function initScratchReveal(){
-  // Lock this panel from scrolling until all circles are done
-revealSection.style.overscrollBehavior = "contain";
-
-// Intercept wheel/touch scroll on the snap container and block forward scroll
-const snapEl = document.querySelector(".snap");
-
-function blockScroll(e) {
-  if (revealSection.classList.contains("scratched")) return;
-  // Only block downward/forward scroll
-  const delta = e.deltaY ?? (e.touches ? 0 : 0);
-  if (delta > 0) e.stopPropagation();
-}
-
-function blockTouch(e) {
-  if (revealSection.classList.contains("scratched")) return;
-  e.stopPropagation();
-}
-
-revealSection.addEventListener("wheel", blockScroll, { capture: true });
-revealSection.addEventListener("touchmove", blockTouch, { capture: true, passive: false });
   const revealSection = document.getElementById("reveal");
   if (!revealSection) return;
+
+  // Lock scrolling until all circles are scratched
+  function blockScroll(e) {
+    if (revealSection.classList.contains("scratched")) return;
+    if (e.deltaY > 0) e.stopPropagation();
+  }
+
+  function blockTouch(e) {
+    if (revealSection.classList.contains("scratched")) return;
+    e.stopPropagation();
+  }
+
+  revealSection.addEventListener("wheel", blockScroll, { capture: true });
+  revealSection.addEventListener("touchmove", blockTouch, { capture: true, passive: false });
 
   const tiles = Array.from(revealSection.querySelectorAll(".scratch"));
   const doneText = document.getElementById("revealDone");
   const marriedMsg = document.getElementById("marriedMsg");
 
   const completed = new Set();
-
-  // how much must be scratched off per circle to count as "done"
-  const COMPLETE_THRESHOLD = 0.15; // 55% scratched
+  const COMPLETE_THRESHOLD = 0.15;
 
   function makeGoldTexture(ctx, w, h){
     const g1 = ctx.createRadialGradient(w*0.35, h*0.35, 10, w*0.5, h*0.5, w*0.7);
@@ -323,45 +315,40 @@ revealSection.addEventListener("touchmove", blockTouch, { capture: true, passive
     ctx.globalAlpha = 1;
   }
 
-  // IMPORTANT: w/h MUST be CSS pixel size (rect.width/rect.height)
   function getScratchPercent(ctx, w, h){
     const img = ctx.getImageData(0,0,w,h).data;
     let transparent = 0;
-
-    // sample grid: smaller number = more accurate but more CPU
     const step = 10;
-
     for (let y=0; y<h; y+=step){
       for (let x=0; x<w; x+=step){
         const i = (y*w + x) * 4;
         if (img[i+3] === 0) transparent++;
       }
     }
-
     const total = (Math.ceil(h/step) * Math.ceil(w/step));
     return transparent / total;
   }
 
   function checkAllDone(){
-  if (completed.size !== tiles.length) return;
+    if (completed.size !== tiles.length) return;
 
-  if (doneText) doneText.removeAttribute("hidden");
-  if (marriedMsg){
-    marriedMsg.removeAttribute("hidden");
-    marriedMsg.classList.add("show");
+    if (doneText) doneText.removeAttribute("hidden");
+    if (marriedMsg){
+      marriedMsg.removeAttribute("hidden");
+      marriedMsg.classList.add("show");
+    }
+
+    jsConfetti.addConfetti({
+      confettiNumber: 260,
+      confettiRadius: 5,
+      confettiColors: ['#ff4f8b', '#ff7fb0', '#ffd1e1', '#ffffff'],
+    }).catch(()=>{});
+
+    startCountdown();
+
+    // Unlock scroll + show scroll indicator
+    revealSection.classList.add("scratched");
   }
-// ✅ NEW: fire confetti at the same moment
-  jsConfetti.addConfetti({
-    confettiNumber: 260,
-    confettiRadius: 5,
-    confettiColors: ['#ff4f8b', '#ff7fb0', '#ffd1e1', '#ffffff'],
-  }).catch(()=>{});
-  startCountdown();
-// ✅ NEW: unlock scrolling + show scroll indicator
-  revealSection.classList.add("scratched");
-  revealSection.style.overscrollBehavior = "auto";
-
-}
 
   tiles.forEach((tile, idx) => {
     const canvas = tile.querySelector(".scratch__canvas");
@@ -369,10 +356,8 @@ revealSection.addEventListener("touchmove", blockTouch, { capture: true, passive
 
     let isDown = false;
     let initialized = false;
-
     let rectW = 0;
     let rectH = 0;
-
     let lastX = null;
     let lastY = null;
 
@@ -389,9 +374,7 @@ revealSection.addEventListener("touchmove", blockTouch, { capture: true, passive
       canvas.width = Math.round(rectW * dpr);
       canvas.height = Math.round(rectH * dpr);
 
-      // draw in CSS pixels
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
       makeGoldTexture(ctx, rectW, rectH);
       ctx.globalCompositeOperation = "source-over";
     }
@@ -403,14 +386,13 @@ revealSection.addEventListener("touchmove", blockTouch, { capture: true, passive
       const x = clientX - rect.left;
       const y = clientY - rect.top;
 
-      const brush = rect.width < 130 ? 26 : 34; // BIGGER brush
+      const brush = rect.width < 130 ? 26 : 34;
 
       ctx.globalCompositeOperation = "destination-out";
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
       ctx.lineWidth = brush * 2;
 
-      // smooth stroke between points (feels way better)
       if (lastX === null){
         lastX = x; lastY = y;
       }
@@ -420,7 +402,6 @@ revealSection.addEventListener("touchmove", blockTouch, { capture: true, passive
       ctx.lineTo(x, y);
       ctx.stroke();
 
-      // also “dab” at point (fills gaps)
       ctx.beginPath();
       ctx.arc(x, y, brush, 0, Math.PI*2);
       ctx.fill();
@@ -433,13 +414,10 @@ revealSection.addEventListener("touchmove", blockTouch, { capture: true, passive
     function maybeComplete(){
       if (tile.classList.contains("done")) return;
 
-      // KEY FIX: use CSS size rectW/rectH, not canvas.width/height
       const pct = getScratchPercent(ctx, rectW, rectH);
 
       if (pct >= COMPLETE_THRESHOLD){
-        // fully clear instantly
         ctx.clearRect(0, 0, rectW, rectH);
-
         tile.classList.add("done");
         completed.add(idx);
         checkAllDone();

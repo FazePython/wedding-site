@@ -1491,8 +1491,8 @@ body.scene-final .rsvpTop{
   }
 }
 #travel {
-  align-items: flex-start;
-  padding-top: 130px;
-  padding-bottom: 200px;
-  min-height: fit-content;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 80px;
+  min-height: 100svh;
 }

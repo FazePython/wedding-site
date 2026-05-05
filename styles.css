@@ -1493,5 +1493,6 @@ body.scene-final .rsvpTop{
 #travel {
   align-items: flex-start;
   padding-top: 130px;
-  padding-bottom: 120px;
+  padding-bottom: 200px;
+  min-height: fit-content;
 }

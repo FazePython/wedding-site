@@ -263,6 +263,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ===== Scratch Reveal Logic (WORKING + no repaint bugs) =====
 (function initScratchReveal(){
+  // Lock this panel from scrolling until all circles are done
+revealSection.style.overscrollBehavior = "contain";
+
+// Intercept wheel/touch scroll on the snap container and block forward scroll
+const snapEl = document.querySelector(".snap");
+
+function blockScroll(e) {
+  if (revealSection.classList.contains("scratched")) return;
+  // Only block downward/forward scroll
+  const delta = e.deltaY ?? (e.touches ? 0 : 0);
+  if (delta > 0) e.stopPropagation();
+}
+
+function blockTouch(e) {
+  if (revealSection.classList.contains("scratched")) return;
+  e.stopPropagation();
+}
+
+revealSection.addEventListener("wheel", blockScroll, { capture: true });
+revealSection.addEventListener("touchmove", blockTouch, { capture: true, passive: false });
   const revealSection = document.getElementById("reveal");
   if (!revealSection) return;
 
@@ -337,7 +357,9 @@ document.addEventListener("DOMContentLoaded", () => {
     confettiColors: ['#ff4f8b', '#ff7fb0', '#ffd1e1', '#ffffff'],
   }).catch(()=>{});
   startCountdown();
-
+// ✅ NEW: unlock scrolling + show scroll indicator
+  revealSection.classList.add("scratched");
+  revealSection.style.overscrollBehavior = "auto";
 
 }
 
